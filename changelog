@@ -1,2 +1,6 @@
+16/10:
+*Ajout des fichiers word.c et word.h pour la gestion des mots
+*Définition de la structure d'un hybrid trie
+
 13/10:
 *1st commit test

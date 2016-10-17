@@ -1,3 +1,6 @@
+17/10:
+*Correction word.h
+
 16/10:
 *Ajout des fichiers word.c et word.h pour la gestion des mots
 *Définition de la structure d'un hybrid trie

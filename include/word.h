@@ -1,5 +1,5 @@
-#define _WORD_
 #ifndef _WORD_
+#define _WORD_
 
 char w_head(char* w);
 

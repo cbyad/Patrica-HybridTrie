@@ -3,7 +3,13 @@
 #include <string.h>
 #include <ctype.h>
 #include <stdbool.h>
+
 #include "../include/hybrid_trie.h"
+#include "../include/word_list.h"
+
+/*************
+ * PRIMITIVES
+ *************/
 
 HTptr newHybridTrie(char* word) {
   HTptr newTrie = (HTptr) malloc(sizeof(struct hybridTrie));
@@ -16,8 +22,9 @@ HTptr newHybridTrie(char* word) {
 }
 
 HTptr insertHT(HTptr hybridTrie, char* word) {
-  if(hybridTrie == NULL)
+  if(hybridTrie == NULL) {
     hybridTrie = newHybridTrie(word);
+  }
 
   if(*word < hybridTrie->key) {
     hybridTrie->inf = insertHT(hybridTrie->inf, word);
@@ -69,5 +76,69 @@ bool searchHT(HTptr hybridTrie, char* word) {
       return false;
     else
       return searchHT(hybridTrie->eq, ++word);
+  }
+}
+
+int countwHT(HTptr hybridTrie) {
+  if(hybridTrie == NULL)
+    return 0;
+  int n = hybridTrie->isKey;
+  return n + countwHT(hybridTrie->inf) + countwHT(hybridTrie->eq) + countwHT(hybridTrie->sup);
+}
+
+// TODO
+// wlist wordListHT(HTptr hybridTrie) {
+// 
+// }
+
+int nbNULLHT(HTptr hybridTrie) {
+  if(hybridTrie == NULL)
+    return 1;
+  return nbNULLHT(hybridTrie->inf) + nbNULLHT(hybridTrie->eq) + nbNULLHT(hybridTrie->sup);
+}
+
+int sizeHT(HTptr hybridTrie) {
+  if(hybridTrie == NULL)
+    return -1;
+  return 1 + max3(sizeHT(hybridTrie->inf), sizeHT(hybridTrie->eq), sizeHT(hybridTrie->sup));
+}
+
+
+// int depthAvgHT(HTptr hybridTrie) {
+
+// }
+
+int nbPrefixHT(HTptr hybridTrie, char* word) {
+  if(*word == 0)
+    return countwHT(hybridTrie);
+
+  if(*word < hybridTrie->key)
+    return nbPrefixHT(hybridTrie->inf, word);
+
+  else if(*word > hybridTrie->key)
+    return nbPrefixHT(hybridTrie->sup, word);
+
+  else 
+    return hybridTrie->isKey + nbPrefixHT(hybridTrie->eq, ++word);
+}
+
+HTptr removeHT(HTptr hybridTrie, char* word) {
+  if(hybridTrie == NULL)
+    return hybridTrie;
+
+  if(*word < hybridTrie->key) {
+    return removeHT(hybridTrie->inf, word);
+  }
+
+  else if(*word > hybridTrie->key) {
+    return removeHT(hybridTrie->sup, word);
+  }
+
+  else {
+    if(*(word+1) == 0) {
+      hybridTrie->isKey = false;
+      return hybridTrie;
+    }
+    return removeHT(hybridTrie->eq, ++word);
   }
 }

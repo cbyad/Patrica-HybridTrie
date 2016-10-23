@@ -1,9 +1,11 @@
 #ifndef _WORD_LIST_
 #define _WORD_LIST_
 
-/*************************************
- * 1st element of word list is empty
- *************************************/
+#include <stdbool.h>
+
+/****************************************
+ * 1st element of word list must be empty
+ ****************************************/
 
 // Linked list structure
 typedef struct word_list {
@@ -22,5 +24,8 @@ void printList(wlist l);
 
 // Remove aword list from memory
 void freeList(wlist l);
+
+// Return true if word list is empty
+bool wlistIsEmpty(wlist l);
 
 #endif

@@ -1,8 +1,11 @@
 23/10:
+*Ajout d'un dossier example contenant des fichiers texte à encoder dans le dictionnaire
+*Ajout de build_dict.c/.h pour construire le dictionnaire
+*Ajout de my_functions.c/.h contenant des fonctions utiles
 *Liste de mots fonctionnelles
 
 22/10:
-*Ajout des listes chaînées pour représenter une liste de mots (word_list.h/.c)
+*Ajout des listes chaînées pour représenter une liste de mots (word_list.c/.h)
 *Ajout de quelques primitives sur les tries hybrides
 
 17/10:

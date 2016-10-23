@@ -4,19 +4,23 @@
 #include <stdbool.h>
 
 #include "../include/word_list.h"
+#include "../include/my_functions.h"
+
+#define MAX(x, y) x > y ? x : y
 
 // Hybrid trie structure
 typedef struct hybridTrie {
   char key;
   bool isKey;
   struct hybridTrie* inf;
-  struct hybridT* eq;
-  struct hybridT* sup;
+  struct hybridTrie* eq;
+  struct hybridTrie* sup;
 } *HTptr;
 
 /****************
  * PRIMITIVES
  ****************/
+
 // Create a node with key as a key
 HTptr newHybridTrie(char* word);
 
@@ -29,13 +33,29 @@ void freeHT(HTptr hybridTrie);
 /**********************
  * ADVANCES FUNCTIONS
  **********************/
+
 // Search a word
 bool searchHT(HTptr hybridTrie, char* word);
 
 // Count words in hybrid trie
-int nbWordsHT(HTptr hybridTrie);
+int countwHT(HTptr hybridTrie);
 
 // Return a word list from hybrid trie
 wlist wordListHT(HTptr hybridTrie);
+
+// Count NULL pointers in hybrid trie
+int nbNULLHT(HTptr hybridTrie);
+
+// Return hybrid trie size
+int sizeHT(HTptr hybridTrie);
+
+// Return average hybrid trie depth
+int depthAvgHT(HTptr hybridTrie);
+
+// Count word prefix from word
+int nbPrefixHT(HTptr hybridTrie, char* word);
+
+// Remove word from hybrid trie
+HTptr removeHT(HTptr hybridTrie, char* word);
 
 #endif

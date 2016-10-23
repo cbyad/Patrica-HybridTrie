@@ -35,3 +35,7 @@ void freeList(wlist l) {
   free(l);
 }
 
+bool wlistIsEmpty(wlist l) {
+  return l->next == NULL;
+}
+

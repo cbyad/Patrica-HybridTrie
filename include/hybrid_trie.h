@@ -32,10 +32,10 @@ void freeHT(HTptr hybridTrie);
 // Search a word
 bool searchHT(HTptr hybridTrie, char* word);
 
-// 
+// Count words in hybrid trie
 int nbWordsHT(HTptr hybridTrie);
 
-// 
-list wordListHT(HTptr hybridTrie);
+// Return a word list from hybrid trie
+wlist wordListHT(HTptr hybridTrie);
 
 #endif

@@ -1,3 +1,6 @@
+23/10:
+*Liste de mots fonctionnelles
+
 22/10:
 *Ajout des listes chaînées pour représenter une liste de mots (word_list.h/.c)
 *Ajout de quelques primitives sur les tries hybrides

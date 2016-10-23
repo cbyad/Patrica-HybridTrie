@@ -7,7 +7,7 @@
 
 HTptr newHybridTrie(char* word) {
   HTptr newTrie = (HTptr) malloc(sizeof(struct hybridTrie));
-  newTrie->key = tolower(*word);
+  newTrie->key = *word;
   newTrie->isKey = false;
   newTrie->inf = NULL;
   newTrie->eq = NULL;
@@ -16,20 +16,19 @@ HTptr newHybridTrie(char* word) {
 }
 
 HTptr insertHT(HTptr hybridTrie, char* word) {
-  if(hybridTrie == NULL) {
+  if(hybridTrie == NULL)
     hybridTrie = newHybridTrie(word);
-  }
 
-  if(tolower(*word) < hybridTrie->key) {
+  if(*word < hybridTrie->key) {
     hybridTrie->inf = insertHT(hybridTrie->inf, word);
   }
 
-  else if(tolower(*word) > hybridTrie->key) {
+  else if(*word > hybridTrie->key) {
     hybridTrie->sup = insertHT(hybridTrie->sup, word);
   }
 
   else {
-    if(*word == 0)
+    if(*(word+1) == 0)
       hybridTrie->isKey = true;
     else
       hybridTrie->eq = insertHT(hybridTrie->eq, ++word);
@@ -45,4 +44,30 @@ void freeHT(HTptr hybridTrie) {
   freeHT(hybridTrie->eq);
   freeHT(hybridTrie->sup);
   free(hybridTrie);
+}
+
+/*********************
+ * ADVANCED FUNCTIONS
+ *********************/
+
+bool searchHT(HTptr hybridTrie, char* word) {
+  if(hybridTrie == NULL)
+    return false;
+
+  if(*word < hybridTrie->key) {
+    return searchHT(hybridTrie->inf, word);
+  }
+
+  else if(*word > hybridTrie->key) {
+    return searchHT(hybridTrie->sup, word);
+  }
+
+  else {
+    if(*(word+1) == 0 && hybridTrie->isKey)
+      return true;
+    else if(*(word+1) == 0 && !hybridTrie->isKey)
+      return false;
+    else
+      return searchHT(hybridTrie->eq, ++word);
+  }
 }

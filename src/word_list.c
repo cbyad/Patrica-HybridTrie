@@ -3,29 +3,31 @@
 
 #include "../include/word_list.h"
 
-list newList(char* word) {
-  list newList = (list) malloc(sizeof(struct word_list));
-  newList->word = word;
+wlist newList() {
+  wlist newList = (wlist) malloc(sizeof(struct word_list));
+  newList->word = NULL;
   newList->next = NULL;
   return newList;
 }
 
-list addList(list l, char* word) {
-  if(l == NULL) {
-    l = newList(word);
-    return l;
+wlist addList(wlist l, char* word) {
+  while(l->next != NULL)
+    l = l->next;
+  wlist tmp = newList();
+  tmp->word = word;
+  l->next = tmp;
+  return l->next;
+}
+
+void printList(wlist l) {
+  l = l->next;
+  while(l != NULL) {
+    printf("%s\n", l->word);
+    l = l->next;
   }
-  return addList(l->next, word);
 }
 
-void printList(list l) {
-  if(l == NULL)
-    return;
-  printf("%s\n", l->word);
-  printList(l->next);
-}
-
-void freeList(list l) {
+void freeList(wlist l) {
   if(l == NULL)
     return;
   freeList(l->next);

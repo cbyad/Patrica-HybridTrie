@@ -7,7 +7,7 @@
 
 int main() {
   HTptr my_hybridTrie = newHybridTrie("\0");
-  insertHT(my_hybridTrie, "Bonjour");
+  
   freeHT(my_hybridTrie);
   exit(0);
 }

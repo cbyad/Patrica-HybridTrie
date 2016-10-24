@@ -1,3 +1,30 @@
 *Fonction qui liste les mots du trie hybride dans l'ordre alphabétique
 *Fonction calculant la profondeur moyenne des feuilles du trie hybride
 *Importation dans le dictionnaire à partir de fichiers texte
+
+
+
+
+/*----------------------- trie patricia  -------------------*/
+
+*primitive de base
+
+*Fonction qui recherche un mot dans un dictionnaire
+*Fonction qui compte les mots presents dans un dictionnaire
+*Fonction qui liste les mots du dictionnaire dans l'ordre alphabetique
+*Fonction qui compte les pointeurs vers Nil
+*Fonction qui calcul la hauteur de trie patricia
+*Fonction calculant la profondeur moyenne des feuilles du trie patrica
+*Fonction qui calcul de combien de mot du dictionnaire  un mot(quelconque) est prefixe
+*Fonction qui supprime un mot de la structure
+
+
+*Fonction qui fusionne deux patricia-tries
+
+
+/*----------------------- trie patricia & trie hybride -------------------*/
+
+
+
+*Fonction qui transforme un trie hybride en trie patricia --------> commun
+*Fonction qui transforme un trie patricia en trie hybride --------> commun

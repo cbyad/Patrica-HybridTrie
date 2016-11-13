@@ -1,6 +1,6 @@
 *Fonction qui liste les mots du trie hybride dans l'ordre alphabétique
 *Fonction calculant la profondeur moyenne des feuilles du trie hybride
-*Importation dans le dictionnaire à partir de fichiers texte
+*Importation dans le dictionnaire à partir de fichiers texte (fait)
 
 
 

@@ -15,7 +15,7 @@ wlist read_dict(char* path){
     if (file != NULL)
     {
         
-        rewind(file); // put cursor on the begin of the file
+        rewind(file); 
         myList = newList();
        
             while (fgets(stringContent,SIZE_MAX, file) != NULL)

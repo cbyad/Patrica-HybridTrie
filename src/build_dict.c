@@ -21,6 +21,7 @@ wlist read_dict(char* path){
             while (fgets(stringContent,SIZE_MAX, file) != NULL)
             {
                 addList(myList, stringContent);
+                
             }
     
             fclose(file);

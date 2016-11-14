@@ -18,7 +18,7 @@ wlist addList(wlist l, char* word) {
     
     tmp->word = (char*) malloc(sizeof(char)*strlen(word)+1);
     strcpy(tmp->word, word);
-    tmp->word[strlen(word)]='\0';
+    tmp->word[strlen(word)]='\0'; 
     
 
     

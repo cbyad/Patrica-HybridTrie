@@ -10,7 +10,7 @@
 // Linked list structure
 typedef struct word_list {
   char* word;
-  struct linked_list* next;
+  struct word_list* next;
 } *wlist;
 
 // Return an empty word list

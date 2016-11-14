@@ -3,12 +3,15 @@
 #include <stdbool.h>
 #include "word_list.h"
 
-struct patricia_node {
-  char* val;
-  struct patricia_node* child;
-  struct patricia_node* sibling;
-};
-typedef struct patricia_node* patricia_node;
+#define ALPHABET_SIZE 127
+
+typedef struct patricia_node {
+    char* val;
+    int prefix_count ;
+    struct patricia_node* child[ALPHABET_SIZE];
+    struct patricia_node* sibling;
+} *patriciaTrie;
+
 
 
 /****************
@@ -17,13 +20,13 @@ typedef struct patricia_node* patricia_node;
 
 
 // Create a node with key as a key
-patricia_node creerPatriciaVide(char* word);
+patriciaTrie creerPatriciaVide(char* word);
 
 // Insert a new word to a Patricia trie
-patricia_node ajouterMot(patricia_node t ,char* mot);
+patriciaTrie ajouterMot(patriciaTrie t ,char* mot);
 
 // Remove a patricia trie from memory
-void libererPT(patricia_node t);
+void libererPT(patriciaTrie t);
 
 
 
@@ -32,29 +35,29 @@ void libererPT(patricia_node t);
  **********************/
 
 // Search a word
-bool recherche(patricia_node t ,char* mot);
+bool recherche(patriciaTrie t ,char* mot);
 
 // Count words in patricia trie
-int comptageMot(patricia_node t);
+int comptageMot(patriciaTrie t);
 
 // Return a word list from patricia trie
-wlist listeMots(patricia_node t);
+wlist listeMots(patriciaTrie t);
 
 // Count NULL pointers in patricia trie
-int comptageNil(patricia_node t);
+int comptageNil(patriciaTrie t);
 
 // Return average patricia trie depth
-int profondeurMoyenne(patricia_node t);
+int profondeurMoyenne(patriciaTrie t);
 
 // Count word prefix from word
-int prefixe(patricia_node t ,char* mot);
+int prefixe(patriciaTrie t ,char* mot);
 
 // Remove word from hybrid trie
-patricia_node suppression(patricia_node t ,char* mot );
+patriciaTrie suppression(patriciaTrie t ,char* mot );
 
 
 // Return height's patricia trie
-int hauteur(patricia_node t);
+int hauteur(patriciaTrie t);
 
 
 

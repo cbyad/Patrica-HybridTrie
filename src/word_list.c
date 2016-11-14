@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 #include "../include/word_list.h"
-#include <string.h>
+#include <string.h> 
 
 wlist newList() {
   wlist newList = (wlist) malloc(sizeof(struct word_list));
@@ -15,13 +15,15 @@ wlist addList(wlist l, char* word) {
   while(l->next != NULL)
     l = l->next;
     wlist tmp = newList();
-   
-    // allocate the char necessary before  copy the content
-    tmp->word = (char*) malloc(sizeof(char)*strlen(word));
-    strcpy(tmp->word, word);
     
-  l->next = tmp;
-  return l->next;
+    tmp->word = (char*) malloc(sizeof(char)*strlen(word)+1);
+    strcpy(tmp->word, word);
+    tmp->word[strlen(word)]='\0';
+    
+
+    
+    l->next = tmp;
+    return l->next;
 }
 
 void printList(wlist l) {

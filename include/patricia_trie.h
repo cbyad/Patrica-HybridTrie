@@ -5,7 +5,15 @@
 
 
 //#define ALPHABET_SIZE 128
-//#define END_WORD '/0'
+//#define END_WORD '$'
+
+/*
+ le langage c definie de base le caractere '\0' comme caractere de fin de chaine.
+ Donc pour eviter une confusion pour la terminaison d'un mot du trie patricia ,
+ on choisira un autre caractere '$' pour reelement marqué cette difference.
+ 
+*/
+
 typedef struct patricia_node {
     char* val;
     bool isTerminal ; // tell us about if is val is terminal or not
@@ -19,6 +27,13 @@ typedef struct patricia_node {
 /****************
  * PRIMITIVES
  ****************/
+
+//++ get length ofthe biggest commum prefix of stringA and stringB
+int getPrefix(char* stringA ,char* stringB);                //ok
+
+
+//++ get string of the biggest commum prefix of stringA and stringB
+char* getPrefixString(char* stringA ,char* stringB);            //ok
 
 
 // Create a node with key as a key
@@ -40,7 +55,7 @@ bool isEmptyPatricia(patriciaTrie pt);                              //ok
  **********************/
 
 // Search a word
-bool searchPatricia(patriciaTrie pt ,char* mot);
+bool searchPatricia(patriciaTrie pt ,char* mot);               // ok (mais...)
 // Count words in patricia trie
 int countWordPatricia(patriciaTrie pt);
 

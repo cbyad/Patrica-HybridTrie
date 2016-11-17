@@ -1,6 +1,6 @@
 #include "../include/build_dict.h"
 
-#define SIZE_MAX 30
+#define SIZE_MAX_STRING 30
 
 
 
@@ -8,8 +8,7 @@ wlist read_dict(char* path){
     
     wlist myList =NULL ;
     
-    char stringContent[SIZE_MAX];
-    
+    char stringContent[SIZE_MAX_STRING];
     FILE* file=fopen(path,"r");
     
     if (file != NULL)
@@ -18,15 +17,13 @@ wlist read_dict(char* path){
         rewind(file); 
         myList = newList();
        
-            while (fgets(stringContent,SIZE_MAX, file) != NULL)
+            while (fgets(stringContent,SIZE_MAX_STRING, file) != NULL)
             {
                 addList(myList, stringContent);
-                
             }
     
             fclose(file);
             return myList ;
-    
     }
     else
     {

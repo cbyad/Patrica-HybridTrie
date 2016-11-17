@@ -3,13 +3,15 @@
 #include <stdbool.h>
 #include "word_list.h"
 
-#define ALPHABET_SIZE 127
 
+//#define ALPHABET_SIZE 128
+//#define END_WORD '/0'
 typedef struct patricia_node {
     char* val;
-    int prefix_count ;
-    struct patricia_node* child[ALPHABET_SIZE];
-    struct patricia_node* sibling;
+    bool isTerminal ; // tell us about if is val is terminal or not
+    //struct patricia_node* child[ALPHABET_SIZE];
+    struct patricia_node* next ;
+    struct patricia_node* child;
 } *patriciaTrie;
 
 
@@ -20,47 +22,46 @@ typedef struct patricia_node {
 
 
 // Create a node with key as a key
-patriciaTrie creerPatriciaVide(char* word);
+patriciaTrie newPatricia(char* word);                         //ok
 
 // Insert a new word to a Patricia trie
-patriciaTrie ajouterMot(patriciaTrie t ,char* mot);
+patriciaTrie insertPatricia(patriciaTrie pt ,char* mot);   //debut
+
 
 // Remove a patricia trie from memory
-void libererPT(patriciaTrie t);
+void freePatricia(patriciaTrie t);                                     //ok
 
 
+//return a boolean
+bool isEmptyPatricia(patriciaTrie pt);                              //ok
 
 /**********************
  * ADVANCES FUNCTIONS
  **********************/
 
 // Search a word
-bool recherche(patriciaTrie t ,char* mot);
-
+bool searchPatricia(patriciaTrie pt ,char* mot);
 // Count words in patricia trie
-int comptageMot(patriciaTrie t);
+int countWordPatricia(patriciaTrie pt);
 
 // Return a word list from patricia trie
-wlist listeMots(patriciaTrie t);
+wlist listWords(patriciaTrie pt);
 
 // Count NULL pointers in patricia trie
-int comptageNil(patriciaTrie t);
+int countNilPatricia(patriciaTrie pt);
 
 // Return average patricia trie depth
-int profondeurMoyenne(patriciaTrie t);
+int averageDepthPatricia(patriciaTrie pt);
 
 // Count word prefix from word
-int prefixe(patriciaTrie t ,char* mot);
+int prefixPatricia(patriciaTrie pt ,char* mot);
 
 // Remove word from hybrid trie
-patriciaTrie suppression(patriciaTrie t ,char* mot );
+patriciaTrie deletePatricia(patriciaTrie pt ,char* mot );
 
 
 // Return height's patricia trie
-int hauteur(patriciaTrie t);
-
-
-
+int height(patriciaTrie pt);
 
 #endif
 

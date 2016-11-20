@@ -28,14 +28,6 @@ typedef struct patricia_node {
  * PRIMITIVES
  ****************/
 
-//++ get length ofthe biggest commum prefix of stringA and stringB
-int getPrefix(char* stringA ,char* stringB);                //ok
-
-
-//++ get string of the biggest commum prefix of stringA and stringB
-char* getPrefixString(char* stringA ,char* stringB);            //ok
-
-
 // Create a node with key as a key
 patriciaTrie newPatricia(char* word);                         //ok
 
@@ -44,26 +36,26 @@ patriciaTrie insertPatricia(patriciaTrie pt ,char* mot);   //debut
 
 
 // Remove a patricia trie from memory
-void freePatricia(patriciaTrie t);                                     //ok
+void freePatricia(patriciaTrie t);                          //ok
 
 
 //return a boolean
-bool isEmptyPatricia(patriciaTrie pt);                              //ok
+bool isEmptyPatricia(patriciaTrie pt);                     //ok
 
 /**********************
  * ADVANCES FUNCTIONS
  **********************/
 
 // Search a word
-bool searchPatricia(patriciaTrie pt ,char* mot);               // ok (mais...)
+bool searchPatricia(patriciaTrie pt ,char* mot);        // ok
 // Count words in patricia trie
-int countWordPatricia(patriciaTrie pt);
+int countWordPatricia(patriciaTrie pt);                 //ok
 
 // Return a word list from patricia trie
 wlist listWords(patriciaTrie pt);
 
 // Count NULL pointers in patricia trie
-int countNilPatricia(patriciaTrie pt);
+int countNilPatricia(patriciaTrie pt);                   //ok
 
 // Return average patricia trie depth
 int averageDepthPatricia(patriciaTrie pt);
@@ -76,7 +68,7 @@ patriciaTrie deletePatricia(patriciaTrie pt ,char* mot );
 
 
 // Return height's patricia trie
-int height(patriciaTrie pt);
+int heightPatricia(patriciaTrie pt);                      //ok
 
 #endif
 

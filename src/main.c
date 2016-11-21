@@ -4,20 +4,32 @@
 
 #include "../include/patricia_trie.h"
 #include "../include/hybrid_trie.h"
+#include "../include/build_dict.h"
+#include "../include/word_list.h"
+
 
 int main() {
-  HTptr my_hybridTrie = NULL;
+  /*******
+  * INIT 
+  *******/
+
+  HTptr my_hybridTrie = newEmptyHT();
+  // wlist basic = read_dict("../example/basic"); 
   
   /*************
    * TEST
    *************/
-  my_hybridTrie = insertHT(my_hybridTrie, "test");
+  insertHT(my_hybridTrie, "test");
   insertHT(my_hybridTrie, "testament");
   insertHT(my_hybridTrie, "testosterone");
   insertHT(my_hybridTrie, "bon");
   insertHT(my_hybridTrie, "bonjour");
-  removeHT(my_hybridTrie, "testamentj");
-  printf("%d\n", nbPrefixHT(my_hybridTrie, "te"));
+
+  char* search = "testosterone";
+
+  printf("nbPrefix: %d\n", nbPrefixHT(my_hybridTrie, "te"));
+  printf("words: %d\n", countwHT(my_hybridTrie));
+  printf("search %s: %d\n", search, searchHT(my_hybridTrie, search));
 
   freeHT(my_hybridTrie);
   exit(0);

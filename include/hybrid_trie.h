@@ -53,7 +53,7 @@ wlist wordListHT(HTptr hybridTrie);
 int nbNULLHT(HTptr hybridTrie);
 
 // Return hybrid trie size
-int sizeHT(HTptr hybridTrie);
+int heightHT(HTptr hybridTrie);
 
 // Return average hybrid trie depth
 int depthAvgHT(HTptr hybridTrie);

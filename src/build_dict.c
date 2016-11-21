@@ -4,30 +4,20 @@
 
 
 
-wlist read_dict(char* path){
-    
-    wlist myList =NULL ;
-    
+wlist read_dict(char* path){   
+    wlist myList = NULL ;
+
     char stringContent[SIZE_MAX_STRING];
     FILE* file=fopen(path,"r");
-    
-    if (file != NULL)
-    {
-        
-        rewind(file); 
-        myList = newList();
-       
-            while (fgets(stringContent,SIZE_MAX_STRING, file) != NULL)
-            {
-                addList(myList, stringContent);
-            }
-    
-            fclose(file);
-            return myList ;
+    myList = newList();
+    if (file != NULL) {
+        rewind(file);
+        while (fgets(stringContent,SIZE_MAX_STRING, file) != NULL) {
+            if (stringContent[strlen(stringContent)-1] == '\n')
+                stringContent[strlen(stringContent)-1] = 0;
+            addList(myList, stringContent);
+        }
+        fclose(file);
     }
-    else
-    {
-        return NULL ;
-    }
-
+    return myList;
 }

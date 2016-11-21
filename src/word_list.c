@@ -17,7 +17,8 @@ bool wlistIsEmpty(wlist l) {
 }
 
 wlist addList(wlist l, char* word) {
-  wlist tmp = (char*) malloc(sizeof(char)*strlen(word)+1);
+  wlist tmp = newList();
+  tmp->word = (char*) malloc(sizeof(char)*strlen(word)+1);
   strcpy(tmp->word, word);
   tmp->next = l;
   tmp->prev = l->prev;
@@ -35,11 +36,22 @@ void printList(wlist l) {
 }
 
 void freeList(wlist l) {
-  if(wlistIsEmpty(l)) 
+  if (wlistIsEmpty(l)) 
     free(l);
   else {
     free(l->word);
     freeList(l->next);
     free(l);
   }
+}
+
+wlist wlistcat(wlist dest, wlist src) {
+  if (wlistIsEmpty(dest))
+    return src;
+  if (wlistIsEmpty(src))
+    return dest;
+  dest->prev->next = src->next;
+  src->prev->next = dest;
+  freeList(src);
+  return dest;
 }

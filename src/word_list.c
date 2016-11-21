@@ -29,7 +29,7 @@ wlist addList(wlist l, char* word) {
 
 void printList(wlist l) {
   wlist tmp = l->next;
-  while(tmp != l) {
+  while (tmp != l) {
     printf("%s\n", tmp->word);
     tmp = tmp->next;
   }

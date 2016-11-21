@@ -13,24 +13,26 @@ int main() {
   * INIT 
   *******/
 
-  HTptr my_hybridTrie = newEmptyHT();
+  HTptr my_hybridTrie = NULL;
   // wlist basic = read_dict("../example/basic"); 
   
   /*************
    * TEST
    *************/
-  insertHT(my_hybridTrie, "test");
-  insertHT(my_hybridTrie, "testament");
-  insertHT(my_hybridTrie, "testosterone");
-  insertHT(my_hybridTrie, "bon");
-  insertHT(my_hybridTrie, "bonjour");
+  my_hybridTrie = insertHT(my_hybridTrie, "test");
+  // insertHT(my_hybridTrie, "testament");
+  // insertHT(my_hybridTrie, "testosterone");
+  // insertHT(my_hybridTrie, "bon");
+  // insertHT(my_hybridTrie, "bonjour");
 
   char* search = "testosterone";
 
   printf("nbPrefix: %d\n", nbPrefixHT(my_hybridTrie, "te"));
   printf("words: %d\n", countwHT(my_hybridTrie));
   printf("search %s: %d\n", search, searchHT(my_hybridTrie, search));
+  printf("nbNULL: %d\n", nbNULLHT(my_hybridTrie));
 
   freeHT(my_hybridTrie);
+  
   exit(0);
 }

@@ -33,6 +33,9 @@ HTptr insertHT(HTptr hybridTrie, char* word);
 // Remove an hybrid trie from memory
 void freeHT(HTptr hybridTrie);
 
+//Return true if hybrid trie is empty
+bool isEmptyHT(HTptr hybridTrie);
+
 /**********************
  * ADVANCES FUNCTIONS
  **********************/

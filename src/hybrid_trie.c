@@ -11,14 +11,6 @@
  * PRIMITIVES
  *************/
 
-HTptr newEmptyHT() {
-  HTptr newTrie = (HTptr) malloc(sizeof(struct hybridTrie));
-  newTrie->inf = NULL;
-  newTrie->eq = NULL;
-  newTrie->sup = NULL;
-  return newTrie;
-}
-
 HTptr newHybridTrie(char* word) {
   HTptr newTrie = (HTptr) malloc(sizeof(struct hybridTrie));
   newTrie->key = *word;

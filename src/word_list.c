@@ -7,42 +7,39 @@
 wlist newList() {
   wlist newList = (wlist) malloc(sizeof(struct word_list));
   newList->word = NULL;
-  newList->next = NULL;
+  newList->prev = newList;
+  newList->next = newList;
   return newList;
 }
 
-wlist addList(wlist l, char* word) {
-  while(l->next != NULL)
-    l = l->next;
-    wlist tmp = newList();
-    
-    tmp->word = (char*) malloc(sizeof(char)*strlen(word)+1);
-    strcpy(tmp->word, word);
-    tmp->word[strlen(word)]='\0'; 
-    
+bool wlistIsEmpty(wlist l) {
+  return l->next == l;
+}
 
-    
-    l->next = tmp;
-    return l->next;
+wlist addList(wlist l, char* word) {
+  wlist tmp = (char*) malloc(sizeof(char)*strlen(word)+1);
+  strcpy(tmp->word, word);
+  tmp->next = l;
+  tmp->prev = l->prev;
+  l->prev->next = tmp;
+  l->prev = tmp;
+  return tmp;
 }
 
 void printList(wlist l) {
-  l = l->next;
-  while(l != NULL) {
-    printf("%s\n", l->word);
-    l = l->next;
+  wlist tmp = l->next;
+  while(tmp != l) {
+    printf("%s\n", tmp->word);
+    tmp = tmp->next;
   }
 }
 
 void freeList(wlist l) {
-  if(l == NULL)
-    return;
-  freeList(l->next);
-  free(l->word);
-  free(l);
+  if(wlistIsEmpty(l)) 
+    free(l);
+  else {
+    free(l->word);
+    freeList(l->next);
+    free(l);
+  }
 }
-
-bool wlistIsEmpty(wlist l) {
-  return l->next == NULL;
-}
-

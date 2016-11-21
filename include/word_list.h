@@ -10,6 +10,7 @@
 // Linked list structure
 typedef struct word_list {
   char* word;
+  struct word_list* prev;
   struct word_list* next;
 } *wlist;
 

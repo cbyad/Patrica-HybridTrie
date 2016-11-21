@@ -1,6 +1,6 @@
 21/11:
 *Ajout de la fonction newEmptyHT()
-
+*wlist est maintenant une liste doublement chaînée
 
 23/10:
 *Ajout d'un dossier example contenant des fichiers texte à encoder dans le dictionnaire

@@ -45,10 +45,17 @@ bool searchPatricia(patriciaTrie pt ,char* mot){
     
     if (isEmptyPatricia(pt)) return false ;
     
+<<<<<<< HEAD
     int result= getPrefix(mot, pt->val);
     if(result==0) return searchPatricia(pt->next, mot);
     if(result==strlen(pt->val) && pt->isTerminal && strlen(pt->val)==strlen(mot)) return true ;
     if(result==strlen(pt->val)) return searchPatricia(pt->child,mot+result);
+=======
+    int k= getPrefix(mot, pt->val);
+    if(k==0) return searchPatricia(pt->next, mot);
+    if(k==(int)strlen(pt->val) && pt->isTerminal && strlen(pt->val)==strlen(mot)) return true ;
+    if(k==(int)strlen(pt->val)) return searchPatricia(pt->child,mot+k);
+>>>>>>> c2586fe4e9ebefb70a294c388bd984e02c887972
     return false ;
 
 }

@@ -21,6 +21,9 @@ typedef struct hybridTrie {
  * PRIMITIVES
  ****************/
 
+// Create a new empty hybrid trie
+HTptr newEmptyHT();
+
 // Create a node with key as a key
 HTptr newHybridTrie(char* word);
 
@@ -29,6 +32,9 @@ HTptr insertHT(HTptr hybridTrie, char* word);
 
 // Remove an hybrid trie from memory
 void freeHT(HTptr hybridTrie);
+
+//Return true if hybrid trie is empty
+bool isEmptyHT(HTptr hybridTrie);
 
 /**********************
  * ADVANCES FUNCTIONS
@@ -47,7 +53,7 @@ wlist wordListHT(HTptr hybridTrie);
 int nbNULLHT(HTptr hybridTrie);
 
 // Return hybrid trie size
-int sizeHT(HTptr hybridTrie);
+int heightHT(HTptr hybridTrie);
 
 // Return average hybrid trie depth
 int depthAvgHT(HTptr hybridTrie);

@@ -7,25 +7,29 @@
  * 1st element of word list must be empty
  ****************************************/
 
-// Linked list structure
+/* Linked list structure */
 typedef struct word_list {
   char* word;
+  struct word_list* prev;
   struct word_list* next;
 } *wlist;
 
-// Return an empty word list
+/* Return an empty word list */
 wlist newList();
 
-// Add a word to word list
+/* Add a word to word list */
 wlist addList(wlist l, char* word);
 
-// Display all the elements of word list
+/* Display all the elements of word list */
 void printList(wlist l);
 
-// Remove aword list from memory
+/* Remove aword list from memory */
 void freeList(wlist l);
 
-// Return true if word list is empty
+/* Return true if word list is empty */
 bool wlistIsEmpty(wlist l);
+
+/* Append the src wlist to the dest wlist */
+wlist wlistcat(wlist dest, wlist src);
 
 #endif

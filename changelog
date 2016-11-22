@@ -1,3 +1,9 @@
+21/11:
+*Importation vers hybridTrie ✓
+*Modification read_dict() : '\n' n'est plus stocké
+*wlist est maintenant une liste doublement chaînée
+*Renommage sizeHT() -> heightHT()
+
 23/10:
 *Ajout d'un dossier example contenant des fichiers texte à encoder dans le dictionnaire
 *Ajout de build_dict.c/.h pour construire le dictionnaire

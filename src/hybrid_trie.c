@@ -22,20 +22,20 @@ HTptr newHybridTrie(char* word) {
 }
 
 HTptr insertHT(HTptr hybridTrie, char* word) {
-  if(hybridTrie == NULL) {
+  if (hybridTrie == NULL) {
     hybridTrie = newHybridTrie(word);
   }
 
-  if(*word < hybridTrie->key) {
+  if (*word < hybridTrie->key) {
     hybridTrie->inf = insertHT(hybridTrie->inf, word);
   }
 
-  else if(*word > hybridTrie->key) {
+  else if (*word > hybridTrie->key) {
     hybridTrie->sup = insertHT(hybridTrie->sup, word);
   }
 
   else {
-    if(*(word+1) == 0)
+    if (*(word+1) == 0)
       hybridTrie->isKey = true;
     else
       hybridTrie->eq = insertHT(hybridTrie->eq, ++word);
@@ -45,7 +45,7 @@ HTptr insertHT(HTptr hybridTrie, char* word) {
 }
 
 void freeHT(HTptr hybridTrie) {
-  if(hybridTrie == NULL)
+  if (hybridTrie == NULL)
     return;
   freeHT(hybridTrie->inf);
   freeHT(hybridTrie->eq);
@@ -58,21 +58,21 @@ void freeHT(HTptr hybridTrie) {
  *********************/
 
 bool searchHT(HTptr hybridTrie, char* word) {
-  if(hybridTrie == NULL)
+  if (hybridTrie == NULL)
     return false;
 
-  if(*word < hybridTrie->key) {
+  if (*word < hybridTrie->key) {
     return searchHT(hybridTrie->inf, word);
   }
 
-  else if(*word > hybridTrie->key) {
+  else if (*word > hybridTrie->key) {
     return searchHT(hybridTrie->sup, word);
   }
 
   else {
-    if(*(word+1) == 0 && hybridTrie->isKey)
+    if (*(word+1) == 0 && hybridTrie->isKey)
       return true;
-    else if(*(word+1) == 0 && !hybridTrie->isKey)
+    else if (*(word+1) == 0 && !hybridTrie->isKey)
       return false;
     else
       return searchHT(hybridTrie->eq, ++word);
@@ -80,7 +80,7 @@ bool searchHT(HTptr hybridTrie, char* word) {
 }
 
 int countwHT(HTptr hybridTrie) {
-  if(hybridTrie == NULL)
+  if (hybridTrie == NULL)
     return 0;
   int n = hybridTrie->isKey;
   return n + countwHT(hybridTrie->inf) + countwHT(hybridTrie->eq) + countwHT(hybridTrie->sup);
@@ -92,15 +92,15 @@ int countwHT(HTptr hybridTrie) {
 // }
 
 int nbNULLHT(HTptr hybridTrie) {
-  if(hybridTrie == NULL)
+  if (hybridTrie == NULL)
     return 1;
   return nbNULLHT(hybridTrie->inf) + nbNULLHT(hybridTrie->eq) + nbNULLHT(hybridTrie->sup);
 }
 
-int sizeHT(HTptr hybridTrie) {
-  if(hybridTrie == NULL)
+int heightHT(HTptr hybridTrie) {
+  if (hybridTrie == NULL)
     return -1;
-  return 1 + max3(sizeHT(hybridTrie->inf), sizeHT(hybridTrie->eq), sizeHT(hybridTrie->sup));
+  return 1 + max3(heightHT(hybridTrie->inf), heightHT(hybridTrie->eq), heightHT(hybridTrie->sup));
 }
 
 
@@ -109,13 +109,13 @@ int sizeHT(HTptr hybridTrie) {
 // }
 
 int nbPrefixHT(HTptr hybridTrie, char* word) {
-  if(*word == 0)
+  if (*word == 0)
     return countwHT(hybridTrie);
 
-  if(*word < hybridTrie->key)
+  if (*word < hybridTrie->key)
     return nbPrefixHT(hybridTrie->inf, word);
 
-  else if(*word > hybridTrie->key)
+  else if (*word > hybridTrie->key)
     return nbPrefixHT(hybridTrie->sup, word);
 
   else 
@@ -123,19 +123,19 @@ int nbPrefixHT(HTptr hybridTrie, char* word) {
 }
 
 HTptr removeHT(HTptr hybridTrie, char* word) {
-  if(hybridTrie == NULL)
+  if (hybridTrie == NULL)
     return hybridTrie;
 
-  if(*word < hybridTrie->key) {
+  if (*word < hybridTrie->key) {
     return removeHT(hybridTrie->inf, word);
   }
 
-  else if(*word > hybridTrie->key) {
+  else if (*word > hybridTrie->key) {
     return removeHT(hybridTrie->sup, word);
   }
 
   else {
-    if(*(word+1) == 0) {
+    if (*(word+1) == 0) {
       hybridTrie->isKey = false;
       return hybridTrie;
     }

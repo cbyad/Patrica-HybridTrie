@@ -19,4 +19,5 @@ int main() {
     printf("search %s: %d\n", search, searchHT(my_hybridTrie, search));
     freeHT(my_hybridTrie);
     exit(0);
+    //r4r4
 }

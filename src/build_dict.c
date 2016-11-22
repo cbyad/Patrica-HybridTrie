@@ -5,7 +5,7 @@
 
 
 wlist read_dict(char* path){
-    
+    //frf
     wlist myList =NULL ;
     
     char stringContent[SIZE_MAX_STRING];

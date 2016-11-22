@@ -19,7 +19,7 @@ wlist read_dict(char* path);
 // Insert words from wlist into hybrid trie
 HTptr insertListHT(HTptr hybridTrie, wlist list);
 
-
+//efe
 //insert  words from wlist into patricia
 patriciaTrie insertListPT(patriciaTrie pt , wlist list);
 

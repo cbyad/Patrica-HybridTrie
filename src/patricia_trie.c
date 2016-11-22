@@ -89,7 +89,11 @@ patriciaTrie insertPatricia(patriciaTrie pt ,char* word)  { //??
 
 void split(patriciaTrie pt, int k) // ???
 {
+<<<<<<< Updated upstream
     //r4r4
+=======
+    //test
+>>>>>>> Stashed changes
     patriciaTrie p = newPatricia(pt->val+k);
     p->child = pt->child;
     pt->child = p;

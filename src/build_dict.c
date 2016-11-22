@@ -3,7 +3,7 @@
 #define SIZE_MAX_STRING 30
 
 
-
+//ffrf
 wlist read_dict(char* path){
     //frf
     wlist myList =NULL ;

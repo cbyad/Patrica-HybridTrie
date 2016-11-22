@@ -72,7 +72,7 @@ patriciaTrie deletePatricia(patriciaTrie pt ,char* mot );
 // Return height's patricia trie
 int heightPatricia(patriciaTrie pt);                                     //ok
 
-//Merge 2 Patricia trie
+//Merge 2 Patricia tries
 patriciaTrie mergePatricia(patriciaTrie pt1 ,patriciaTrie pt2);
 
 #endif

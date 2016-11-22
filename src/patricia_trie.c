@@ -1,3 +1,4 @@
+
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
@@ -20,17 +21,17 @@ patriciaTrie newPatricia(char* word){
     strcpy(pt->val,word);
     pt->val[strlen(word)]='\0';
     pt->isTerminal=true ; //par default
-
+    
     return pt ;
 }
 
 void freePatricia(patriciaTrie pt){
-
+    
     if (pt==NULL) return ;
     
-            free(pt->val);
-            freePatricia(pt->next);
-            freePatricia(pt->child);
+    free(pt->val);
+    freePatricia(pt->next);
+    freePatricia(pt->child);
     
     free(pt);
 }
@@ -45,19 +46,15 @@ bool searchPatricia(patriciaTrie pt ,char* mot){
     
     if (isEmptyPatricia(pt)) return false ;
     
-<<<<<<< HEAD
+  
     int result= getPrefix(mot, pt->val);
     if(result==0) return searchPatricia(pt->next, mot);
     if(result==strlen(pt->val) && pt->isTerminal && strlen(pt->val)==strlen(mot)) return true ;
     if(result==strlen(pt->val)) return searchPatricia(pt->child,mot+result);
-=======
-    int k= getPrefix(mot, pt->val);
-    if(k==0) return searchPatricia(pt->next, mot);
-    if(k==(int)strlen(pt->val) && pt->isTerminal && strlen(pt->val)==strlen(mot)) return true ;
-    if(k==(int)strlen(pt->val)) return searchPatricia(pt->child,mot+k);
->>>>>>> c2586fe4e9ebefb70a294c388bd984e02c887972
+  
+   
     return false ;
-
+    
 }
 
 
@@ -78,29 +75,24 @@ int countWordPatricia(patriciaTrie pt) {
 
 patriciaTrie insertPatricia(patriciaTrie pt ,char* word)  { //??
     
-        if (isEmptyPatricia(pt)) return newPatricia(word);
-            
-
-        int k =getPrefix(word,pt->val);
-        if( k==0 ) pt->next = insertPatricia(pt->next,word);
-        else if( k<strlen(word) )
-        {
-            if( k<strlen(pt->val) ) // cut or not to cut?
-                split(pt,k);
-            pt->child = insertPatricia(pt->child,word+k);
-        }
-        return pt;
+    if (isEmptyPatricia(pt)) return newPatricia(word);
+    
+    
+    int k =getPrefix(word,pt->val);
+    if( k==0 ) pt->next = insertPatricia(pt->next,word);
+    else if( k<strlen(word) )
+    {
+        if( k<strlen(pt->val) ) // cut or not to cut?
+            split(pt,k);
+        pt->child = insertPatricia(pt->child,word+k);
+    }
+    return pt;
     
 }
 
 
 void split(patriciaTrie pt, int k) // ???
 {
-<<<<<<< Updated upstream
-    //r4r4
-=======
-    //test
->>>>>>> Stashed changes
     patriciaTrie p = newPatricia(pt->val+k);
     p->child = pt->child;
     pt->child = p;
@@ -109,5 +101,4 @@ void split(patriciaTrie pt, int k) // ???
     strcpy(a,pt->val);
     free(pt->val);
     pt->val = a;
-
 }

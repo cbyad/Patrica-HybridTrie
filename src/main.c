@@ -7,21 +7,7 @@
 #include "../include/word_list.h"
 
 int main() {
-<<<<<<< HEAD
-    HTptr my_hybridTrie = NULL;
-    char* path = "example/basic";
-    wlist basic = read_dict(path);
-    for (wlist tmp = basic->next; tmp != basic; tmp = tmp->next)
-        my_hybridTrie = insertHT(my_hybridTrie, tmp->word);
-    printf("words: %d\n", countwHT(my_hybridTrie));
-    printf("nbNULL: %d\n", nbNULLHT(my_hybridTrie));
-    printf("heightHT: %d\n", heightHT(my_hybridTrie));
-    char* search = "professeur";
-    printf("search %s: %d\n", search, searchHT(my_hybridTrie, search));
-    freeHT(my_hybridTrie);
-    exit(0);
-    //enfnf
-=======
+
 
   HTptr my_hybridTrie = NULL;
   char* path = "example/basic";
@@ -39,5 +25,5 @@ int main() {
   freeHT(my_hybridTrie);
 
   exit(0);
->>>>>>> c2586fe4e9ebefb70a294c388bd984e02c887972
+
 }

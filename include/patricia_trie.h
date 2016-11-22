@@ -29,33 +29,36 @@ typedef struct patricia_node {
  ****************/
 
 // Create a node with key as a key
-patriciaTrie newPatricia(char* word);                         //ok
+patriciaTrie newPatricia(char* word);                                        //ok
 
 // Insert a new word to a Patricia trie
-patriciaTrie insertPatricia(patriciaTrie pt ,char* mot);   //debut
+patriciaTrie insertPatricia(patriciaTrie pt ,char* mot);                    //debut
 
+//split a node 
+void split(patriciaTrie pt, int k);                                         //debut
 
 // Remove a patricia trie from memory
-void freePatricia(patriciaTrie t);                          //ok
+void freePatricia(patriciaTrie t);                                          //ok
 
 
 //return a boolean
-bool isEmptyPatricia(patriciaTrie pt);                     //ok
+bool isEmptyPatricia(patriciaTrie pt);                                      //ok
 
 /**********************
  * ADVANCES FUNCTIONS
  **********************/
 
 // Search a word
-bool searchPatricia(patriciaTrie pt ,char* mot);        // ok
+bool searchPatricia(patriciaTrie pt ,char* mot);                           // ok
+
 // Count words in patricia trie
-int countWordPatricia(patriciaTrie pt);                 //ok
+int countWordPatricia(patriciaTrie pt);                                    //ok
 
 // Return a word list from patricia trie
 wlist listWords(patriciaTrie pt);
 
 // Count NULL pointers in patricia trie
-int countNilPatricia(patriciaTrie pt);                   //ok
+int countNilPatricia(patriciaTrie pt);                                     //ok
 
 // Return average patricia trie depth
 int averageDepthPatricia(patriciaTrie pt);
@@ -66,9 +69,11 @@ int prefixPatricia(patriciaTrie pt ,char* mot);
 // Remove word from hybrid trie
 patriciaTrie deletePatricia(patriciaTrie pt ,char* mot );
 
-
 // Return height's patricia trie
-int heightPatricia(patriciaTrie pt);                      //ok
+int heightPatricia(patriciaTrie pt);                                     //ok
+
+//Merge 2 Patricia trie
+patriciaTrie mergePatricia(patriciaTrie pt1 ,patriciaTrie pt2);
 
 #endif
 

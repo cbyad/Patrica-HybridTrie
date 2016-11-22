@@ -97,6 +97,5 @@ void split(patriciaTrie pt, int k) // ???
     strcpy(a,pt->val);
     free(pt->val);
     pt->val = a;
-    //bla
 
 }

@@ -16,12 +16,15 @@ int main() {
   for (wlist tmp = basic->next; tmp != basic; tmp = tmp->next)
     my_hybridTrie = insertHT(my_hybridTrie, tmp->word);
 
-  printf("words: %d\n", countwHT(my_hybridTrie));
-  printf("nbNULL: %d\n", nbNULLHT(my_hybridTrie));
-  printf("heightHT: %d\n", heightHT(my_hybridTrie));
+  // printList(basic);
 
-  char* search = "professeur";
-  printf("search %s: %d\n", search, searchHT(my_hybridTrie, search));
+  // printf("words: %d\n", countwHT(my_hybridTrie));
+  // printf("nbNULL: %d\n", nbNULLHT(my_hybridTrie));
+  // printf("heightHT: %d\n", heightHT(my_hybridTrie));
+
+  // char* search = "professeur";
+  // printf("search %s: %d\n", search, searchHT(my_hybridTrie, search));
+  printf("%d\n", depthAvgHT(my_hybridTrie));
   freeHT(my_hybridTrie);
 
   exit(0);

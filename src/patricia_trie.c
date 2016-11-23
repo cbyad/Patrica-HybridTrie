@@ -49,8 +49,8 @@ bool searchPatricia(patriciaTrie pt ,char* mot){
   
     int result= getPrefix(mot, pt->val);
     if(result==0) return searchPatricia(pt->next, mot);
-    if(result==strlen(pt->val) && pt->isTerminal && strlen(pt->val)==strlen(mot)) return true ;
-    if(result==strlen(pt->val)) return searchPatricia(pt->child,mot+result);
+    if(result==(int)strlen(pt->val) && pt->isTerminal && strlen(pt->val)==strlen(mot)) return true ;
+    if(result==(int)strlen(pt->val)) return searchPatricia(pt->child,mot+result);
   
    
     return false ;
@@ -80,9 +80,9 @@ patriciaTrie insertPatricia(patriciaTrie pt ,char* word)  { //??
     
     int k =getPrefix(word,pt->val);
     if( k==0 ) pt->next = insertPatricia(pt->next,word);
-    else if( k<strlen(word) )
+    else if( k<(int)strlen(word) )
     {
-        if( k<strlen(pt->val) ) // cut or not to cut?
+        if( k<(int)strlen(pt->val) ) // cut or not to cut?
             split(pt,k);
         pt->child = insertPatricia(pt->child,word+k);
     }

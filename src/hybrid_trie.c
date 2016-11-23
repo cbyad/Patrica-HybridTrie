@@ -86,7 +86,10 @@ int countwHT(HTptr hybridTrie) {
   return n + countwHT(hybridTrie->inf) + countwHT(hybridTrie->eq) + countwHT(hybridTrie->sup);
 }
 
-// TODO
+// wlist wordListHT_aux() {
+
+// }
+
 // wlist wordListHT(HTptr hybridTrie) {
 // 
 // }
@@ -103,10 +106,27 @@ int heightHT(HTptr hybridTrie) {
   return 1 + max3(heightHT(hybridTrie->inf), heightHT(hybridTrie->eq), heightHT(hybridTrie->sup));
 }
 
+int depthAvgHT_aux(HTptr hybridTrie, int depth, int *nbLeaf) {
+  if (hybridTrie == NULL)
+    return 0;
+  if (hybridTrie->eq == NULL && hybridTrie->inf == NULL && hybridTrie->sup == NULL) {
+    *nbLeaf = *nbLeaf + 1;
+    return depth;
+  }
+  return depthAvgHT_aux(hybridTrie->eq, depth+1, nbLeaf) + depthAvgHT_aux(hybridTrie->inf, depth+1, nbLeaf) 
+          + depthAvgHT_aux(hybridTrie->sup, depth+1, nbLeaf);
+}
 
-// int depthAvgHT(HTptr hybridTrie) {
+int depthAvgHT(HTptr hybridTrie) {
+  int total;
+  int *nbLeaf = malloc(sizeof(int));
+  *nbLeaf = 0;
+  total = depthAvgHT_aux(hybridTrie, 0, nbLeaf);
+  total /= *nbLeaf;
+  free(nbLeaf);
+  return total;
+}
 
-// }
 
 int nbPrefixHT(HTptr hybridTrie, char* word) {
   if (*word == 0)

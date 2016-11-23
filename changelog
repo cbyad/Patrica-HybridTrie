@@ -1,3 +1,8 @@
+23/11:
+*Fonction profondeur moyenne des feuilles du trie hybride
+*Ajout de fonctions auxiliaires pour wordListHT() et heightHT()
+*Correction warning comparison between signed and unsigned integer
+
 21/11:
 *Importation vers hybridTrie ✓
 *Modification read_dict() : '\n' n'est plus stocké

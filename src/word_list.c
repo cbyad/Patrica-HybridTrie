@@ -52,6 +52,6 @@ wlist wlistcat(wlist dest, wlist src) {
     return dest;
   dest->prev->next = src->next;
   src->prev->next = dest;
-  freeList(src);
+  free(src);
   return dest;
 }

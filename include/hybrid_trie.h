@@ -46,6 +46,9 @@ bool searchHT(HTptr hybridTrie, char* word);
 // Count words in hybrid trie
 int countwHT(HTptr hybridTrie);
 
+// Auxiliary function to wordListHT()
+wlist wordListHT_aux(HTptr hybridTrie, wlist list, char* word);
+
 // Return a word list from hybrid trie
 wlist wordListHT(HTptr hybridTrie);
 
@@ -54,6 +57,9 @@ int nbNULLHT(HTptr hybridTrie);
 
 // Return hybrid trie size
 int heightHT(HTptr hybridTrie);
+
+// Auxiliary function to depthAvgHT()
+int depthAvgHT_aux(HTptr hybridTrie, int depth, int *nbLeaf);
 
 // Return average hybrid trie depth
 int depthAvgHT(HTptr hybridTrie);

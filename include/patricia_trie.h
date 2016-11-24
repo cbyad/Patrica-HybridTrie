@@ -5,7 +5,7 @@
 
 
 //#define ALPHABET_SIZE 128
-//#define END_WORD '$'
+#define END_WORD '$'
 
 /*
  le langage c definie de base le caractere '\0' comme caractere de fin de chaine.
@@ -32,10 +32,10 @@ typedef struct patricia_node {
 patriciaTrie newPatricia(char* word);                                        //ok
 
 // Insert a new word to a Patricia trie
-patriciaTrie insertPatricia(patriciaTrie pt ,char* mot);                    //debut
+patriciaTrie insertPatricia(patriciaTrie pt ,char* mot);                    //ok
 
 //split a node 
-void split(patriciaTrie pt, int k);                                         //debut
+void split(patriciaTrie pt, int k);                                         //ok
 
 // Remove a patricia trie from memory
 void freePatricia(patriciaTrie t);                                          //ok

@@ -4,13 +4,7 @@
 
 /*----------------------- trie patricia  -------------------*/
 
-*primitive de base
-
-*Fonction qui recherche un mot dans un dictionnaire
-*Fonction qui compte les mots presents dans un dictionnaire
 *Fonction qui liste les mots du dictionnaire dans l'ordre alphabetique
-*Fonction qui compte les pointeurs vers Nil
-*Fonction qui calcul la hauteur de trie patricia
 *Fonction calculant la profondeur moyenne des feuilles du trie patrica
 *Fonction qui calcul de combien de mot du dictionnaire  un mot(quelconque) est prefixe
 *Fonction qui supprime un mot de la structure

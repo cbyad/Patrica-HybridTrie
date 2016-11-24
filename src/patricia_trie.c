@@ -20,7 +20,14 @@ patriciaTrie newPatricia(char* word){
     pt->val = (char*) malloc(sizeof(char)*strlen(word)+1); //  +1 pour '\0'
     strcpy(pt->val,word);
     pt->val[strlen(word)]='\0';
-    pt->isTerminal=true ; //par default
+    pt->isTerminal=false ; //par default
+    
+    //ajout de caractere de fin de chaine pour distinguer un mot
+    pt->child=(patriciaTrie)malloc(sizeof(struct patricia_node));
+    pt->child->val=(char*)malloc(sizeof(char));pt->child->val[0]=END_WORD ;
+    pt->child->child=NULL;
+    pt->child->next=NULL;
+    pt->isTerminal=true;
     
     return pt ;
 }
@@ -35,7 +42,6 @@ void freePatricia(patriciaTrie pt){
     
     free(pt);
 }
-
 
 
 bool isEmptyPatricia(patriciaTrie pt){
@@ -64,7 +70,7 @@ int countNilPatricia(patriciaTrie pt){
 
 
 int heightPatricia(patriciaTrie pt){
-    return (isEmptyPatricia(pt))? 0:1+max3(heightPatricia(pt->child),heightPatricia(pt->next),-1);
+    return (isEmptyPatricia(pt))? -1:1+max3(heightPatricia(pt->child),heightPatricia(pt->next),-5);
 }
 
 int countWordPatricia(patriciaTrie pt) {
@@ -73,16 +79,18 @@ int countWordPatricia(patriciaTrie pt) {
 
 
 
-patriciaTrie insertPatricia(patriciaTrie pt ,char* word)  { //??
-    
+patriciaTrie insertPatricia(patriciaTrie pt ,char* word)  {     
     if (isEmptyPatricia(pt)) return newPatricia(word);
     
     
     int k =getPrefix(word,pt->val);
-    if( k==0 ) pt->next = insertPatricia(pt->next,word);
+    if( k==0 ){
+        pt->next = insertPatricia(pt->next,word);
+    }
+    
     else if( k<(int)strlen(word) )
     {
-        if( k<(int)strlen(pt->val) ) // cut or not to cut?
+        if( k<(int)strlen(pt->val) ) // cut or not ?
             split(pt,k);
         pt->child = insertPatricia(pt->child,word+k);
     }
@@ -91,14 +99,15 @@ patriciaTrie insertPatricia(patriciaTrie pt ,char* word)  { //??
 }
 
 
-void split(patriciaTrie pt, int k) // ???
+void split(patriciaTrie pt, int k)
 {
     patriciaTrie p = newPatricia(pt->val+k);
     p->child = pt->child;
     pt->child = p;
     
-    char* a = (char*) malloc(k*sizeof(char));
-    strcpy(a,pt->val);
+    char* a = (char*) malloc(sizeof(char)*(k+1));
+    strncpy(a,pt->val,k);
+    a[k]='\0';
     free(pt->val);
     pt->val = a;
 }

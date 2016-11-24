@@ -25,5 +25,5 @@ HTptr insertListHT(HTptr hybridTrie, wlist list);
 
 //insert  words from wlist into patricia
 patriciaTrie insertListPT(patriciaTrie pt , wlist list);
-//r43r4
+
 #endif

@@ -9,8 +9,8 @@ int max3(int a, int b, int c) {
 }
 
 int getPrefix(char* stringA ,char* stringB){
-    int sizeA =strlen(stringA);
-    int sizeB= strlen(stringB);
+    int sizeA =(int)strlen(stringA);
+    int sizeB= (int)strlen(stringB);
     int i  ;
     
     for (i=0; i<sizeA; i++) {
@@ -24,8 +24,8 @@ int getPrefix(char* stringA ,char* stringB){
 
 
 char* getPrefixString(char* stringA ,char* stringB){
-    int sizeA =strlen(stringA);
-    int sizeB= strlen(stringB);
+    int sizeA =(int)strlen(stringA);
+    int sizeB=(int) strlen(stringB);
     int i  ;
     int nSize=1 ;
     char* newString =(char*)malloc(sizeof(char)*nSize);

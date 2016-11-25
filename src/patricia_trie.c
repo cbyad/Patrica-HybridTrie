@@ -11,7 +11,7 @@
 
 patriciaTrie newPatricia(char* word){
     
-    if(strcmp(word," ")==0) return NULL;
+   // if(strcmp(word," ")==0) return NULL; not necessary
     patriciaTrie pt =(patriciaTrie)malloc(sizeof(struct patricia_node));
     
     pt->child=NULL ;
@@ -20,14 +20,7 @@ patriciaTrie newPatricia(char* word){
     pt->val = (char*) malloc(sizeof(char)*strlen(word)+1); //  +1 pour '\0'
     strcpy(pt->val,word);
     pt->val[strlen(word)]='\0';
-    pt->isTerminal=false ; //par default
-    
-    //ajout de caractere de fin de chaine pour distinguer un mot
-    pt->child=(patriciaTrie)malloc(sizeof(struct patricia_node));
-    pt->child->val=(char*)malloc(sizeof(char));pt->child->val[0]=END_WORD ;
-    pt->child->child=NULL;
-    pt->child->next=NULL;
-    pt->isTerminal=true;
+    pt->isTerminal=true ; //par default
     
     return pt ;
 }
@@ -74,6 +67,7 @@ int heightPatricia(patriciaTrie pt){
 }
 
 int countWordPatricia(patriciaTrie pt) {
+    
     return (pt == NULL)? 0: (pt->isTerminal) + countWordPatricia(pt->child) + countWordPatricia(pt->next);
 }
 
@@ -85,6 +79,7 @@ patriciaTrie insertPatricia(patriciaTrie pt ,char* word)  {
     
     int k =getPrefix(word,pt->val);
     if( k==0 ){
+        //add at the good position---------------------------------------
         pt->next = insertPatricia(pt->next,word);
     }
     
@@ -92,8 +87,39 @@ patriciaTrie insertPatricia(patriciaTrie pt ,char* word)  {
     {
         if( k<(int)strlen(pt->val) ) // cut or not ?
             split(pt,k);
+        
         pt->child = insertPatricia(pt->child,word+k);
     }
+    
+    /*
+    else if (k==(int)strlen(word)) {
+        
+        if (k<(int)strlen(pt->val)) {
+            
+            //diff
+            
+            patriciaTrie p = newPatricia(pt->val+k);
+            p->child = pt->child;
+            pt->child = p;
+           
+            
+            
+            pt->isTerminal=false ;// being not a word now
+            
+            char* a = (char*) malloc(sizeof(char)*(k+1));
+            strncpy(a,pt->val,k);
+            a[k]='\0';
+            free(pt->val);
+            pt->val = a;
+            
+            pt->next =newPatricia("$");
+            
+           
+        }
+         pt->child = insertPatricia(pt->child,word+k);//
+    }
+     */
+    
     return pt;
     
 }
@@ -105,9 +131,13 @@ void split(patriciaTrie pt, int k)
     p->child = pt->child;
     pt->child = p;
     
+    pt->isTerminal=false ;// being not a word now
+    
     char* a = (char*) malloc(sizeof(char)*(k+1));
     strncpy(a,pt->val,k);
     a[k]='\0';
     free(pt->val);
     pt->val = a;
+    
+    
 }

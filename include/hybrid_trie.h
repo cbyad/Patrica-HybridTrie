@@ -9,7 +9,8 @@
 #define MAX(x, y) x > y ? x : y
 
 // Hybrid trie structure
-typedef struct hybridTrie {
+typedef struct hybridTrie 
+{
   char key;
   bool isKey;
   struct hybridTrie* inf;

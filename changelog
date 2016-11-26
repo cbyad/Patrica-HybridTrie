@@ -3,8 +3,6 @@
 *amelioration de creation de patricia
 *insertion et division d'un noeud en deux ok
 
-
-
 23/11:
 *Fonction profondeur moyenne des feuilles du trie hybride
 *Ajout de fonctions auxiliaires pour wordListHT() et heightHT()

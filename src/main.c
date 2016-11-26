@@ -25,9 +25,8 @@ int main() {
  
  */
     HTptr my_hybridTrie = NULL;
-  //  char* path = "example/basic";
-    //wlist basic = read_dict(path);
-    char* path = "/Users/cb_mac/Desktop/UPMC/SEMESTRE1/ALGAV/dev/dev_algav/dev_algav_trie/dev_algav_trie/algav/example/basic";
+   char* path = "example/basic";
+    // char* path = "/Users/cb_mac/Desktop/UPMC/SEMESTRE1/ALGAV/dev/dev_algav/dev_algav_trie/dev_algav_trie/algav/example/basic";
     wlist basic = read_dict(path);
     
     for (wlist tmp = basic->next; tmp != basic; tmp = tmp->next)

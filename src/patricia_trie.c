@@ -72,8 +72,7 @@ int countWordPatricia(patriciaTrie pt) {
 }
 
 
-
-patriciaTrie insertPatricia(patriciaTrie pt ,char* word)  {     
+patriciaTrie insertPatricia(patriciaTrie pt ,char* word)  {
     if (isEmptyPatricia(pt)) return newPatricia(word);
     
     
@@ -91,20 +90,23 @@ patriciaTrie insertPatricia(patriciaTrie pt ,char* word)  {
         pt->child = insertPatricia(pt->child,word+k);
     }
     
-    /*
+    
     else if (k==(int)strlen(word)) {
         
         if (k<(int)strlen(pt->val)) {
             
             //diff
+            patriciaTrie term =newPatricia("S");
+            
+            
             
             patriciaTrie p = newPatricia(pt->val+k);
             p->child = pt->child;
             pt->child = p;
-           
             
+            p->next=term;
             
-            pt->isTerminal=false ;// being not a word now
+            pt->isTerminal=false ;//  not a word now
             
             char* a = (char*) malloc(sizeof(char)*(k+1));
             strncpy(a,pt->val,k);
@@ -112,13 +114,11 @@ patriciaTrie insertPatricia(patriciaTrie pt ,char* word)  {
             free(pt->val);
             pt->val = a;
             
-            pt->next =newPatricia("$");
             
-           
         }
-         pt->child = insertPatricia(pt->child,word+k);//
+        //pt->child = insertPatricia(pt->child,word+k);// not in this case because adding already done
     }
-     */
+    
     
     return pt;
     
@@ -131,7 +131,7 @@ void split(patriciaTrie pt, int k)
     p->child = pt->child;
     pt->child = p;
     
-    pt->isTerminal=false ;// being not a word now
+    pt->isTerminal=false ;//  not a word now
     
     char* a = (char*) malloc(sizeof(char)*(k+1));
     strncpy(a,pt->val,k);

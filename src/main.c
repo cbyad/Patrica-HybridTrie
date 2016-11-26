@@ -6,6 +6,19 @@
 #include "../include/build_dict.h"
 #include "../include/word_list.h"
 
+
+void parcours(patriciaTrie pt){
+    
+    if (!isEmptyPatricia(pt)) {
+        printf("%s---%d\n",pt->val,pt->isTerminal);
+        parcours(pt->child);
+        parcours(pt->next);
+    }
+    
+}
+
+
+
 int main() {
 
 /* Hybrid test
@@ -23,11 +36,11 @@ int main() {
     // printList(basic);
     
     printf("words: %d\n", countwHT(my_hybridTrie));
-    // printf("nbNULL: %d\n", nbNULLHT(my_hybridTrie));
-    // printf("heightHT: %d\n", heightHT(my_hybridTrie));
+    printf("nbNULL: %d\n", nbNULLHT(my_hybridTrie));
+     printf("heightHT: %d\n", heightHT(my_hybridTrie));
     
-    // char* search = "professeur";
-    // printf("search %s: %d\n", search, searchHT(my_hybridTrie, search));
+     char* search = "a";
+    printf("search %s: %d\n", search, searchHT(my_hybridTrie, search));
     //printf("%d\n", depthAvgHT(my_hybridTrie));
     freeHT(my_hybridTrie);
     
@@ -47,10 +60,12 @@ int main() {
     
    
     
-    printf("result %d\n",searchPatricia(pt, "appel") );
+    printf("result %d\n",searchPatricia(pt, "elle") );
     printf("Height ....%d\n",heightPatricia(pt));
     printf("Null ....%d\n",countNilPatricia(pt));
     printf("nbWords ....%d\n",countWordPatricia(pt));
+    
+    //parcours(pt);
     
     freePatricia(pt);
     //freePatricia(patricia);

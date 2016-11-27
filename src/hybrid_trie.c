@@ -96,15 +96,37 @@ int countwHT(HTptr hybridTrie)
   return n + countwHT(hybridTrie->inf) + countwHT(hybridTrie->eq) + countwHT(hybridTrie->sup);
 }
 
-// wlist wordListHT_aux() 
-// {
+wlist wordListHT_aux(HTptr hybridTrie, wlist list, char* word) 
+{
+  if (hybridTrie == NULL)
+    return list;
+  char *tmp, *w;
 
-// }
+  w = malloc(sizeof(char)*strlen(word) + 2*sizeof(char));
+  strcpy(w, word);
+  tmp = strchr(w, 0);
+  *tmp = hybridTrie->key;
+  *(tmp+1) = 0;
 
-// wlist wordListHT(HTptr hybridTrie) 
-  // {
-// 
-// }
+  wordListHT_aux(hybridTrie->inf, list, word);
+
+  if (hybridTrie->isKey)
+    addList(list, w);
+
+  wordListHT_aux(hybridTrie->eq, list, w);
+
+  wordListHT_aux(hybridTrie->sup, list, word);
+
+  return list;
+}
+
+wlist wordListHT(HTptr hybridTrie) 
+{
+  wlist list;
+  list = newList();
+  wordListHT_aux(hybridTrie, list, "");
+  return list;
+}
 
 int nbNULLHT(HTptr hybridTrie) 
 {

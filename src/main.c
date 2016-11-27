@@ -25,22 +25,34 @@ int main() {
  
  */
     HTptr my_hybridTrie = NULL;
-   char* path = "example/basic";
+   char* path = "example/test";
+   // char* path1 = "example/test1";
+
     // char* path = "/Users/cb_mac/Desktop/UPMC/SEMESTRE1/ALGAV/dev/dev_algav/dev_algav_trie/dev_algav_trie/algav/example/basic";
     wlist basic = read_dict(path);
+    // wlist basic1 = read_dict(path1);
+
+    // wlistcat(basic, NULL);
+
+    // printList(basic);
     
     for (wlist tmp = basic->next; tmp != basic; tmp = tmp->next)
         my_hybridTrie = insertHT(my_hybridTrie, tmp->word);
     
+
+    wlist tmp = wordListHT(my_hybridTrie);
+    // wordListHT(my_hybridTrie);
+    printList(tmp);
     // printList(basic);
     
     printf("words: %d\n", countwHT(my_hybridTrie));
-    printf("nbNULL: %d\n", nbNULLHT(my_hybridTrie));
-     printf("heightHT: %d\n", heightHT(my_hybridTrie));
+    // printf("nbNULL: %d\n", nbNULLHT(my_hybridTrie));
+    //  printf("heightHT: %d\n", heightHT(my_hybridTrie));
     
-     char* search = "a";
-    printf("search %s: %d\n", search, searchHT(my_hybridTrie, search));
+    //  char* search = "a";
+    // printf("search %s: %d\n", search, searchHT(my_hybridTrie, search));
     //printf("%d\n", depthAvgHT(my_hybridTrie));
+
     freeHT(my_hybridTrie);
     
  /* Patricia test
@@ -59,10 +71,10 @@ int main() {
     
    
     
-    printf("result %d\n",searchPatricia(pt, "elle") );
-    printf("Height ....%d\n",heightPatricia(pt));
-    printf("Null ....%d\n",countNilPatricia(pt));
-    printf("nbWords ....%d\n",countWordPatricia(pt));
+    // printf("result %d\n",searchPatricia(pt, "elle") );
+    // printf("Height ....%d\n",heightPatricia(pt));
+    // printf("Null ....%d\n",countNilPatricia(pt));
+    // printf("nbWords ....%d\n",countWordPatricia(pt));
     
     //parcours(pt);
     

@@ -53,9 +53,9 @@ void freeList(wlist l)
 
 wlist wlistcat(wlist dest, wlist src) 
 {
-  if (wlistIsEmpty(dest))
+  if (dest == NULL || wlistIsEmpty(dest))
     return src;
-  if (wlistIsEmpty(src))
+  if (src == NULL || wlistIsEmpty(src))
     return dest;
   dest->prev->next = src->next;
   src->prev->next = dest;

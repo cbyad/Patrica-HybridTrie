@@ -42,13 +42,17 @@ void printList(wlist l)
 
 void freeList(wlist l) 
 {
-  if (wlistIsEmpty(l)) 
-    free(l);
-  else {
-    free(l->word);
-    freeList(l->next);
-    free(l);
+  for (wlist tmp = l->next; tmp != l; tmp = tmp->next)
+  {
+    free(tmp->word);
+    if(tmp->prev != l ){
+      free(tmp->prev);
+    }
   }
+  if(!wlistIsEmpty(l)){
+    free(l->prev);
+  }
+  free(l);
 }
 
 wlist wlistcat(wlist dest, wlist src) 

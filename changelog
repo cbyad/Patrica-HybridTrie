@@ -1,4 +1,5 @@
 28/11:
+*Correction de quelques fuites de mémoire
 *Trei hybride: Foonction insertion et suppression à partir d'une liste ✓
 *Trie hybride: Fonction liste de mots dans l'ordre alphabétique (trie hybride) ✓
 

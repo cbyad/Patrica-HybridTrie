@@ -27,6 +27,8 @@ int main() {
     HTptr my_hybridTrie = NULL;
    char* path = "Shakespeare/romeo_juliet.txt";
 
+   // char* path = "example/basic";
+
     // char* path = "/Users/cb_mac/Desktop/UPMC/SEMESTRE1/ALGAV/dev/dev_algav/dev_algav_trie/dev_algav_trie/algav/example/basic";
     wlist basic = read_dict(path);
     
@@ -72,6 +74,8 @@ int main() {
     freePatricia(pt);
     //freePatricia(patricia);
     //freePatricia(tr);
+
+    freeList(tmp);
   exit(0);
 
 }

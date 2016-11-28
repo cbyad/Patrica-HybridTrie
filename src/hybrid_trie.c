@@ -1,7 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <ctype.h>
 #include <stdbool.h>
 
 #include "../include/hybrid_trie.h"
@@ -102,19 +101,20 @@ wlist wordListHT_aux(HTptr hybridTrie, wlist list, char* word)
     return list;
   char *tmp, *w;
 
+
+  wordListHT_aux(hybridTrie->inf, list, word);
+
   w = malloc(sizeof(char)*strlen(word) + 2*sizeof(char));
   strcpy(w, word);
   tmp = strchr(w, 0);
   *tmp = hybridTrie->key;
   *(tmp+1) = 0;
-
-  wordListHT_aux(hybridTrie->inf, list, word);
-
+  
   if (hybridTrie->isKey)
     addList(list, w);
 
   wordListHT_aux(hybridTrie->eq, list, w);
-
+  free(w);
   wordListHT_aux(hybridTrie->sup, list, word);
 
   return list;

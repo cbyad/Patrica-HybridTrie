@@ -21,3 +21,18 @@ wlist read_dict(char* path)
   }
   return myList;
 }
+
+
+HTptr insertListHT(HTptr hybridTrie, wlist list)
+{
+  for (wlist tmp = list->next; tmp != list; tmp = tmp->next)
+    hybridTrie = insertHT(hybridTrie, tmp->word);
+  return hybridTrie;
+}
+
+HTptr removeListHT(HTptr hybridTrie, wlist list)
+{
+  for (wlist tmp = list->next; tmp != list; tmp = tmp->next)
+    hybridTrie = removeHT(hybridTrie, tmp->word);
+  return hybridTrie;
+}

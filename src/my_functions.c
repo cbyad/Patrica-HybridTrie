@@ -56,24 +56,24 @@ char* getPrefixString(char* stringA ,char* stringB){
 }
 
 
-void devAlgavAllTest(){
+// void devAlgavAllTest(){
     
-    int choix =0 ;
-    printf("------DEVOIR DE PROGRAMMATION TRIE HYBRIDE & PATRICIA-------\n");
+//     int choix =0 ;
+//     printf("------DEVOIR DE PROGRAMMATION TRIE HYBRIDE & PATRICIA-------\n");
 
-    printf("1.Charger Shapeskeare /n");
-    scanf("%d",&choix);
+//     printf("1.Charger Shapeskeare /n");
+//     scanf("%d",&choix);
     
     
     
-    switch (choix) {
-        case 1:
+//     switch (choix) {
+//         case 1:
             
-            break;
+//             break;
             
-        default:
-            break;
-    }
+//         default:
+//             break;
+//     }
     
     
     
@@ -83,7 +83,7 @@ void devAlgavAllTest(){
 
 
 
-}
+// }
 
 
 

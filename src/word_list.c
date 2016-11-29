@@ -4,8 +4,7 @@
 #include "../include/word_list.h"
 #include <string.h> 
 
-wlist newList() 
-{
+wlist newList() {
   wlist newList = (wlist) malloc(sizeof(struct word_list));
   newList->word = NULL;
   newList->prev = newList;
@@ -13,13 +12,11 @@ wlist newList()
   return newList;
 }
 
-bool wlistIsEmpty(wlist l) 
-{
+bool wlistIsEmpty(wlist l) {
   return l->next == l;
 }
 
-wlist addList(wlist l, char* word) 
-{
+wlist addList(wlist l, char* word) {
   wlist tmp = newList();
   tmp->word = (char*) malloc(sizeof(char)*strlen(word)+1);
   strcpy(tmp->word, word);
@@ -30,20 +27,16 @@ wlist addList(wlist l, char* word)
   return tmp;
 }
 
-void printList(wlist l) 
-{
+void printList(wlist l) {
   wlist tmp = l->next;
-  while (tmp != l) 
-  {
+  while (tmp != l) {
     printf("%s\n", tmp->word);
     tmp = tmp->next;
   }
 }
 
-void freeList(wlist l) 
-{
-  for (wlist tmp = l->next; tmp != l; tmp = tmp->next)
-  {
+void freeList(wlist l) {
+  for (wlist tmp = l->next; tmp != l; tmp = tmp->next){
     free(tmp->word);
     if(tmp->prev != l ){
       free(tmp->prev);
@@ -55,8 +48,7 @@ void freeList(wlist l)
   free(l);
 }
 
-wlist wlistcat(wlist dest, wlist src) 
-{
+wlist wlistcat(wlist dest, wlist src) {
   if (dest == NULL || wlistIsEmpty(dest))
     return src;
   if (src == NULL || wlistIsEmpty(src))

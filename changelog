@@ -1,3 +1,7 @@
+29/11:
+*Trie hybride: Début rework fonction de suppression
+*Trie hybride: Refonte de la fonction newHybridTrie()
+
 28/11:
 *Correction de quelques fuites de mémoire
 *Trei hybride: Foonction insertion et suppression à partir d'une liste ✓

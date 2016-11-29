@@ -27,9 +27,9 @@ int main() {
     HTptr my_hybridTrie = NULL;
   // char* path = "Shakespeare/romeo_juliet.txt";
 
-   // char* path = "example/basic";
+   char* path = "example/basic";
 
-    char* path = "/Users/cb_mac/Desktop/UPMC/SEMESTRE1/ALGAV/dev/dev_algav/dev_algav_trie/dev_algav_trie/algav/example/basic";
+    // char* path = "/Users/cb_mac/Desktop/UPMC/SEMESTRE1/ALGAV/dev/dev_algav/dev_algav_trie/dev_algav_trie/algav/example/basic";
     wlist basic = read_dict(path);
     
     my_hybridTrie = insertListHT(my_hybridTrie, basic);

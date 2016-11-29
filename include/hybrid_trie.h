@@ -22,11 +22,8 @@ typedef struct hybridTrie
  * PRIMITIVES
  ****************/
 
-// Create a new empty hybrid trie
-HTptr newEmptyHT();
-
 // Create a node with key as a key
-HTptr newHybridTrie(char* word);
+HTptr newHybridTrie(char* word, HTptr inf, HTptr eq, HTptr sup);
 
 // Insert a new word to an hybrid trie
 HTptr insertHT(HTptr hybridTrie, char* word);

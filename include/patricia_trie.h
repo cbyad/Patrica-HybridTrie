@@ -32,7 +32,7 @@ typedef struct patricia_node {
 patriciaTrie newPatricia(char* word);                                        //ok
 
 // Insert a new word to a Patricia trie
-patriciaTrie insertPatricia(patriciaTrie pt ,char* mot);                    //ok
+patriciaTrie insertPatricia(patriciaTrie pt ,char* mot);                    //ok mais bugger a revoir
 
 //split a node 
 void split(patriciaTrie pt, int k);                                         //ok
@@ -66,11 +66,12 @@ int averageDepthPatricia(patriciaTrie pt);
 // Count word prefix from word
 int prefixPatricia(patriciaTrie pt ,char* mot);
 
+void join(patriciaTrie pt );
 // Remove word from hybrid trie
 patriciaTrie deletePatricia(patriciaTrie pt ,char* mot );
 
 // Return height's patricia trie
-int heightPatricia(patriciaTrie pt);                                     //ok
+int heightPatricia(patriciaTrie pt);                                     //pas bon a revoir
 
 //Merge 2 Patricia tries
 patriciaTrie mergePatricia(patriciaTrie pt1 ,patriciaTrie pt2);

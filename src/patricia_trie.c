@@ -63,7 +63,7 @@ int countNilPatricia(patriciaTrie pt){
 
 
 int heightPatricia(patriciaTrie pt){
-    return (isEmptyPatricia(pt))? -1:1+max3(heightPatricia(pt->child),heightPatricia(pt->next),-5);
+    return 0;
 }
 
 int countWordPatricia(patriciaTrie pt) {

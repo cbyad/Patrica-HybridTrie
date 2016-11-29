@@ -25,11 +25,11 @@ int main() {
  
  */
     HTptr my_hybridTrie = NULL;
-   char* path = "Shakespeare/romeo_juliet.txt";
+  // char* path = "Shakespeare/romeo_juliet.txt";
 
    // char* path = "example/basic";
 
-    // char* path = "/Users/cb_mac/Desktop/UPMC/SEMESTRE1/ALGAV/dev/dev_algav/dev_algav_trie/dev_algav_trie/algav/example/basic";
+     char* path = "/Users/cb_mac/Desktop/UPMC/SEMESTRE1/ALGAV/dev/dev_algav/dev_algav_trie/dev_algav_trie/algav/example/basic";
     wlist basic = read_dict(path);
     
     my_hybridTrie = insertListHT(my_hybridTrie, basic);
@@ -57,17 +57,17 @@ int main() {
     
     patriciaTrie pt = NULL;
     
-    // for (wlist tmp = basic->next; tmp != basic; tmp = tmp->next)
-    //     pt = insertPatricia(pt, tmp->word);
+    for (wlist tmp = basic->next; tmp != basic; tmp = tmp->next)
+       pt = insertPatricia(pt, tmp->word);
 
    // printList(basic);
     
    
     
     // printf("result %d\n",searchPatricia(pt, "elle") );
-    // printf("Height ....%d\n",heightPatricia(pt));
-    // printf("Null ....%d\n",countNilPatricia(pt));
-    // printf("nbWords ....%d\n",countWordPatricia(pt));
+     printf("Height ....%d\n",heightPatricia(pt));
+     printf("Null ....%d\n",countNilPatricia(pt));
+     printf("nbWords ....%d\n",countWordPatricia(pt));
     
     //parcours(pt);
     

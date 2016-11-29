@@ -62,8 +62,9 @@ int countNilPatricia(patriciaTrie pt){
 }
 
 
+// size is caracterized by size of the longest children 
 int heightPatricia(patriciaTrie pt){
-    return 0;
+    return isEmptyPatricia(pt)?-1 : max3(1+heightPatricia(pt->child), heightPatricia(pt->next), -1);
 }
 
 int countWordPatricia(patriciaTrie pt) {
@@ -96,7 +97,7 @@ patriciaTrie insertPatricia(patriciaTrie pt ,char* word)  {
         if (k<(int)strlen(pt->val)) {
             
             //diff
-            patriciaTrie term =newPatricia("S");
+            patriciaTrie term =newPatricia("$");
             
             
             

@@ -20,6 +20,12 @@ HTptr newHybridTrie(char* word, HTptr inf, HTptr eq, HTptr sup) {
   return newTrie;
 }
 
+
+bool isEmptyHT(HTptr hybridTrie){
+
+    return (hybridTrie==NULL)?true: false ;
+}
+
 HTptr insertHT(HTptr hybridTrie, char* word) {
   if (hybridTrie == NULL) {
     hybridTrie = newHybridTrie(word, NULL, NULL, NULL);

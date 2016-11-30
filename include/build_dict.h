@@ -8,6 +8,22 @@
 #include "../include/patricia_trie.h"
 #include "../include/word_list.h"
 
+
+
+//new ----added for import all files from Shakespeare
+#define _XOPEN_SOUCE 700
+
+
+
+#include <string.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <dirent.h>
+#include <fcntl.h>
+
+
+
 #define BUF_SIZE 100
 
 /**************************
@@ -25,8 +41,17 @@ HTptr insertListHT(HTptr hybridTrie, wlist list);
 // Remove words from wlist of hybrid trie
 HTptr removeListHT(HTptr hybridTrie, wlist list);
 
+//insert all files from Shakespeare to hybrid
+HTptr buildShakespeareHT(char* directory);
+
+/*----------------------------------------------------------*/
 // Insert  words from wlist into patricia
 patriciaTrie insertListPT(patriciaTrie pt , wlist list);
+
+//insert all files from Shakespeare to patricia
+patriciaTrie buildShakespearePT(char* directory);
+
+
 
 
 #endif

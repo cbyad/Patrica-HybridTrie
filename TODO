@@ -11,8 +11,6 @@
 
 
 *Fonction qui fusionne deux patricia-tries
-*charger tous les fichiers du repertoire
-
 
 /*----------------------- trie patricia & trie hybride -------------------*/
 

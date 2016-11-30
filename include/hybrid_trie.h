@@ -32,7 +32,7 @@ HTptr insertHT(HTptr hybridTrie, char* word);
 void freeHT(HTptr hybridTrie);
 
 //Return true if hybrid trie is empty
-bool isEmptyHT(HTptr hybridTrie);
+bool isEmptyHT(HTptr hybridTrie);  //
 
 /**********************
  * ADVANCES FUNCTIONS

@@ -1,3 +1,7 @@
+30/11
+*Importer tous les fichiers du repertoire Shakespeare dans trie Hybrid et patricia
+
+
 29/11:
 *Trie hybride: Début rework fonction de suppression
 *Trie hybride: Refonte de la fonction newHybridTrie()

@@ -17,13 +17,42 @@ patriciaTrie newPatricia(char* word){
     pt->child=NULL ;
     pt->next=NULL ;
     
-    pt->val = (char*) malloc(sizeof(char)*strlen(word)+1); //  +1 pour '\0'
+    pt->val = (char*) malloc(sizeof(char)*strlen(word)+1); //  +1 pour '\0' 
     strcpy(pt->val,word);
     pt->val[strlen(word)]='\0';
     pt->isTerminal=true ; //par default
     
     return pt ;
 }
+
+
+patriciaTrie newpatricia_aux( patriciaTrie child , patriciaTrie next , char* word){
+
+    
+    patriciaTrie pt =(patriciaTrie)malloc(sizeof(struct patricia_node));
+    
+    pt->child=child ;
+    pt->next=next ;
+    
+    pt->val = (char*) malloc(sizeof(char)*strlen(word)+1); //  +1 pour '\0'
+    strcpy(pt->val,word);
+    pt->val[strlen(word)]='\0';
+    pt->isTerminal=true ; //par default
+    
+    return pt ;
+
+
+}
+
+
+
+
+
+
+
+
+
+
 
 void freePatricia(patriciaTrie pt){
     
@@ -38,7 +67,7 @@ void freePatricia(patriciaTrie pt){
 
 
 bool isEmptyPatricia(patriciaTrie pt){
-    return (pt==NULL)?true: (bool)(strcmp(pt->val," ")==0 )  ;
+    return (pt==NULL)  ;
 }
 
 bool searchPatricia(patriciaTrie pt ,char* mot){
@@ -69,7 +98,7 @@ int heightPatricia(patriciaTrie pt){
 
 int countWordPatricia(patriciaTrie pt) {
     
-    return (pt == NULL)? 0: (pt->isTerminal) + countWordPatricia(pt->child) + countWordPatricia(pt->next);
+    return (pt == NULL)? 0: (pt->isTerminal) + countWordPatricia(pt->child) + countWordPatricia(pt->next);//
 }
 
 
@@ -79,7 +108,7 @@ patriciaTrie insertPatricia(patriciaTrie pt ,char* word)  {
     
     int k =getPrefix(word,pt->val);
     if( k==0 ){
-        //add at the good position---------------------------------------
+        //add at the good position--------------------------------------- 
         pt->next = insertPatricia(pt->next,word);
     }
     

@@ -43,29 +43,47 @@ void parcoursHT(HTptr pt) {
 
 int main(){
 
-    // char * directory ="/Users/cb_mac/Desktop/UPMC/SEMESTRE1/ALGAV/dev/Shakespeare" ;
+     char * directory ="/Users/cb_mac/Desktop/UPMC/SEMESTRE1/ALGAV/dev/Shakespeare" ;
     // char * directory ="Shakespeare" ;
-   char* path = "example/basic";
+  // char* path = "example/basic";
     
-    wlist basic = read_dict(path);
+   // wlist basic = read_dict(path);
     
-    HTptr hybrid = NULL;
-    hybrid = insertListHT(hybrid, basic);
+    //HTptr hybrid = NULL;
+   // hybrid = insertListHT(hybrid, basic);
     
     // parcoursHT(hybrid);
-    // HTptr hybrid =buildShakespeareHT(directory);
+     HTptr hybrid =buildShakespeareHT(directory);
     
-    wlist tmp = wordListHT(hybrid);
-    printList(tmp);
+   // wlist tmp = wordListHT(hybrid);
+   // printList(tmp);
     if(!isEmptyHT(hybrid)) {
         
         printf("NbWords : %d \n",countwHT(hybrid));
         printf("nbNULL: %d\n", nbNULLHT(hybrid));
         printf("heightHT: %d\n", heightHT(hybrid));
-        printf("search: %d\n", searchHT(hybrid, "bec"));
+        printf("search: %d\n", searchHT(hybrid, "enter"));
         
     
     }
+    
+    printf("--------------\n");
+    patriciaTrie pt = buildShakespearePT(directory);
+    
+    
+    if(!isEmptyPatricia(pt)) {
+        
+        printf("NbWords : %d \n",countWordPatricia(pt));
+        printf("nbNULL: %d\n", countNilPatricia(pt));
+        printf("heightHT: %d\n", heightPatricia(pt));
+        printf("search: %d\n", searchPatricia(pt, "enter"));
+        
+        
+    }
+    
+    
+    
     freeHT(hybrid);
+    freePatricia(pt);
     return 0 ;
 }

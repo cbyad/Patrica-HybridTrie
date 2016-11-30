@@ -5,7 +5,7 @@
 
 
 //#define ALPHABET_SIZE 128
-#define END_WORD '$'
+
 
 /*
  le langage c definie de base le caractere '\0' comme caractere de fin de chaine.
@@ -16,8 +16,8 @@
 
 typedef struct patricia_node {
     char* val;
-    bool isTerminal ; // tell us about if is val is terminal or not
-    //struct patricia_node* child[ALPHABET_SIZE];
+    bool isTerminal ;
+    
     struct patricia_node* next ;
     struct patricia_node* child;
 } *patriciaTrie;
@@ -27,9 +27,15 @@ typedef struct patricia_node {
 /****************
  * PRIMITIVES
  ****************/
+patriciaTrie newpatricia_aux( patriciaTrie child , patriciaTrie next , char* word);
+
+bool isterminal (patriciaTrie pt){
+
+    return (int)strlen(pt->val)==0 ;
+}
 
 // Create a node with key as a key
-patriciaTrie newPatricia(char* word);                                        //ok
+patriciaTrie newPatricia(char* word);//ok
 
 // Insert a new word to a Patricia trie
 patriciaTrie insertPatricia(patriciaTrie pt ,char* mot);                    //ok mais bugger a revoir

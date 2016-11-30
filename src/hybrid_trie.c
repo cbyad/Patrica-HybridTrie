@@ -10,10 +10,10 @@
  * PRIMITIVES
  *************/
 
-HTptr newHybridTrie(char* word, HTptr inf, HTptr eq, HTptr sup) {
+HTptr newHybridTrie(char word, bool key, HTptr inf, HTptr eq, HTptr sup) {
   HTptr newTrie = (HTptr) malloc(sizeof(struct hybridTrie));
-  newTrie->key = *word;
-  newTrie->isKey = false;
+  newTrie->key = word;
+  newTrie->isKey = key;
   newTrie->inf = inf;
   newTrie->eq = eq;
   newTrie->sup = sup;
@@ -28,7 +28,7 @@ bool isEmptyHT(HTptr hybridTrie){
 
 HTptr insertHT(HTptr hybridTrie, char* word) {
   if (hybridTrie == NULL) {
-    hybridTrie = newHybridTrie(word, NULL, NULL, NULL);
+    hybridTrie = newHybridTrie(*word, false, NULL, NULL, NULL);
   }
 
   if (*word < hybridTrie->key) {
@@ -174,20 +174,45 @@ HTptr removeHT(HTptr hybridTrie, char* word) {
   if (hybridTrie == NULL)
     return NULL;
 
-  if (*word == 0 && hybridTrie->inf == NULL && hybridTrie->eq == NULL && hybridTrie->sup == NULL)
-    return NULL;
-
-  if (*word == 0 && hybridTrie->inf == NULL && hybridTrie->eq == NULL)
-    return hybridTrie->sup;
-  
-  if (*word == 0 && hybridTrie->sup == NULL && hybridTrie->eq == NULL)
-    return hybridTrie->inf;
-  
-  if (*word == 0) {
+  /*** END OF WORD CASE ***/
+  if (*word == hybridTrie->key && *(word+1) == 0) {
     hybridTrie->isKey = false;
+    if (hybridTrie->eq != NULL) {
+      /* nothing to do */
+    }
+    else if (hybridTrie->inf != NULL) {
+      hybridTrie->eq = hybridTrie->inf;
+      freeHT(hybridTrie->inf);
+      hybridTrie->inf = NULL;
+    }
+    else if (hybridTrie->sup != NULL) {
+      hybridTrie->eq = hybridTrie->sup;
+      freeHT(hybridTrie->sup);
+      hybridTrie->sup = NULL;
+    }
+    else {
+      freeHT(hybridTrie);
+      hybridTrie = NULL;
+    }
     return hybridTrie;
-  }
-  
-  /* TODO */
-  return NULL;
+   }
+
+   else {
+    if (*word < hybridTrie->key) {
+      hybridTrie->inf = removeHT(hybridTrie->inf, word);
+    }
+    else if (*word > hybridTrie->key) {
+      hybridTrie->sup = removeHT(hybridTrie->sup, word);
+    }
+    else {
+      hybridTrie->eq = removeHT(hybridTrie->eq, ++word);
+    }
+
+    if (hybridTrie->inf == NULL && hybridTrie->eq == NULL && hybridTrie->sup == NULL) {
+      freeHT(hybridTrie);
+      hybridTrie = NULL;
+    }
+
+    return hybridTrie;
+   }
 }

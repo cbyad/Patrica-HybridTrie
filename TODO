@@ -1,7 +1,3 @@
-*Corrrection fuites mémoire
-*Fonction de suppression dans un trie hybride
-
-
 /*----------------------- trie patricia  -------------------*/
 
 *Fonction qui liste les mots du dictionnaire dans l'ordre alphabetique

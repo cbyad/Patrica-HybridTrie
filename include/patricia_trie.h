@@ -1,6 +1,7 @@
 #ifndef _PATRICIA_TRIE_
 #define _PATRICIA_TRIE_
 #include <stdbool.h>
+#include <string.h>
 #include "word_list.h"
 
 

@@ -216,3 +216,40 @@ HTptr removeHT(HTptr hybridTrie, char* word) {
     return hybridTrie;
    }
 }
+
+/*********************
+ * COMPLEX FUNCTIONS *
+ ********************/
+
+bool isBalanced(HTptr hybridTrie) {
+  if (hybridTrie == NULL)
+    return true;
+
+  if (hybridTrie->inf == NULL && hybridTrie->sup == NULL)
+    return true;
+
+  if (abs(countInfChild(hybridTrie) - countSupChild(hybridTrie)) > 1)
+    return false;
+
+  return isBalanced(hybridTrie->inf) || isBalanced(hybridTrie->eq) || isBalanced(hybridTrie->sup);
+}
+
+int countInfChild(HTptr hybridTrie) {
+  if (hybridTrie == NULL)
+    return 0;
+
+  if (hybridTrie->inf == NULL)
+    return 0;
+
+  return 1 + countInfChild(hybridTrie->inf);
+}
+
+int countSupChild(HTptr hybridTrie) {
+  if (hybridTrie == NULL)
+    return 0;
+
+  if (hybridTrie->sup == NULL)
+    return 0;
+
+  return 1 + countInfChild(hybridTrie->sup);
+}

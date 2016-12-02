@@ -11,48 +11,35 @@
 
 patriciaTrie newPatricia(char* word){
     
-   // if(strcmp(word," ")==0) return NULL; not necessary
     patriciaTrie pt =(patriciaTrie)malloc(sizeof(struct patricia_node));
-    
-    pt->child=NULL ;
-    pt->next=NULL ;
-    
-    pt->val = (char*) malloc(sizeof(char)*strlen(word)+1); //  +1 pour '\0' 
-    strcpy(pt->val,word);
-    pt->val[strlen(word)]='\0';
-    pt->isTerminal=true ; //par default
-    
-    return pt ;
-}
-
-
-patriciaTrie newpatricia_aux( patriciaTrie child , patriciaTrie next , char* word){
-
-    
-    patriciaTrie pt =(patriciaTrie)malloc(sizeof(struct patricia_node));
-    
-    pt->child=child ;
-    pt->next=next ;
     
     pt->val = (char*) malloc(sizeof(char)*strlen(word)+1); //  +1 pour '\0'
     strcpy(pt->val,word);
     pt->val[strlen(word)]='\0';
-    pt->isTerminal=true ; //par default
+    pt->next=NULL ;
+    pt->child=NULL;
     
     return pt ;
-
-
 }
 
 
+patriciaTrie newPatricia_aux( patriciaTrie child , patriciaTrie next , char* word){
+    
+    patriciaTrie pt =(patriciaTrie)malloc(sizeof(struct patricia_node));
+    
+    pt->val = (char*) malloc(sizeof(char)*strlen(word)+1); //  +1 pour '\0'
+    strcpy(pt->val,word);
+    pt->val[strlen(word)]='\0';
+    pt->child=child ;
+    pt->next=next ;
+    
+    return pt ;
+}
 
 
-
-
-
-
-
-
+bool isTerminal (patriciaTrie pt){
+    return strlen(pt->val)==0 ;
+}
 
 void freePatricia(patriciaTrie pt){
     
@@ -65,24 +52,19 @@ void freePatricia(patriciaTrie pt){
     free(pt);
 }
 
-
 bool isEmptyPatricia(patriciaTrie pt){
     return (pt==NULL)  ;
 }
 
-bool searchPatricia(patriciaTrie pt ,char* mot){
-    
+bool searchPatricia(patriciaTrie pt ,char* word){
     if (isEmptyPatricia(pt)) return false ;
     
-  
-    int result= getPrefix(mot, pt->val);
-    if(result==0) return searchPatricia(pt->next, mot);
-    if(result==(int)strlen(pt->val) && pt->isTerminal && strlen(pt->val)==strlen(mot)) return true ;
-    if(result==(int)strlen(pt->val)) return searchPatricia(pt->child,mot+result);
-  
-   
-    return false ;
+    int result= getPrefix(word, pt->val);
+    if(result==0) return searchPatricia(pt->next, word);
+    if(result==(int)strlen(word) && isTerminal(pt->child) ) return true ;
+    if(result==(int)strlen(pt->val)) return searchPatricia(pt->child,word+result);
     
+    return false ;
 }
 
 
@@ -91,83 +73,104 @@ int countNilPatricia(patriciaTrie pt){
 }
 
 
-// size is caracterized by size of the longest children 
+// size is caracterized by size of the longest children
 int heightPatricia(patriciaTrie pt){
+    
     return isEmptyPatricia(pt)?-1 : max3(1+heightPatricia(pt->child), heightPatricia(pt->next), -1);
 }
 
 int countWordPatricia(patriciaTrie pt) {
     
-    return (pt == NULL)? 0: (pt->isTerminal) + countWordPatricia(pt->child) + countWordPatricia(pt->next);//
+    return (pt == NULL)? 0: (int)isTerminal(pt) + countWordPatricia(pt->child) + countWordPatricia(pt->next);
 }
 
 
 patriciaTrie insertPatricia(patriciaTrie pt ,char* word)  {
-    if (isEmptyPatricia(pt)) return newPatricia(word);
     
+    if(isEmptyPatricia(pt)) return  newPatricia_aux(newPatricia("\0"), NULL, word);
+    if(strlen(word)==0) return pt; //don't insert blank space
     
-    int k =getPrefix(word,pt->val);
-    if( k==0 ){
-        //add at the good position--------------------------------------- 
-        pt->next = insertPatricia(pt->next,word);
+    if ( strcmp(pt->val,word)==0 && isTerminal(pt->child)) {
+        return pt ;
     }
     
-    else if( k<(int)strlen(word) )
-    {
-        if( k<(int)strlen(pt->val) ) // cut or not ?
-            split(pt,k);
-        
-        pt->child = insertPatricia(pt->child,word+k);
-    }
+    int k = getPrefix(word, pt->val);
+    int sizeWord = (int)strlen(word);
+    int sizeRoot =(int)strlen(pt->val);
     
+    if(k==0) pt->next=insertPatricia(pt->next,word);
     
-    else if (k==(int)strlen(word)) {
+    else if (sizeWord>sizeRoot) {           // example:                 ap | --> apple
         
-        if (k<(int)strlen(pt->val)) {
-            
-            //diff
-            patriciaTrie term =newPatricia("$");
-            
-            
-            
-            patriciaTrie p = newPatricia(pt->val+k);
-            p->child = pt->child;
-            pt->child = p;
-            
-            p->next=term;
-            
-            pt->isTerminal=false ;//  not a word now
-            
-            char* a = (char*) malloc(sizeof(char)*(k+1));
-            strncpy(a,pt->val,k);
-            a[k]='\0';
-            free(pt->val);
-            pt->val = a;
-            
-            
+        if (k==sizeRoot) {
+            pt->child=insertPatricia(pt->child, word+k);  //
         }
-        //pt->child = insertPatricia(pt->child,word+k);// not in this case because adding already done
+        
+        else if(k<sizeRoot){       //example                            apT  | -->apple
+            split(pt, k);
+            pt->child=insertPatricia(pt->child, word+k);
+        }
     }
-    
-    
-    return pt;
-    
+    else if (sizeWord<sizeRoot ) { //example                           apple | ---> ap
+        
+        if (k==sizeWord) {
+            split(pt, k);
+            pt=insertPatricia(pt, pt->val);
+        }
+        else if (k<sizeWord) {
+            split(pt, k);
+            pt->child=insertPatricia(pt->child, word+k);
+        }
+    }
+    else if (sizeRoot==sizeWord) {
+        
+        if(k==sizeWord && !isTerminal(pt->child)){
+            patriciaTrie p =newPatricia("\0");
+            p->next=pt->child;
+            pt->child=p ;
+            return pt ;
+        }
+        else if (k<sizeWord) {
+            split(pt, k);
+            pt->child=insertPatricia(pt->child, word+k);
+        }
+    }
+    return pt ;
 }
 
 
 void split(patriciaTrie pt, int k)
 {
     patriciaTrie p = newPatricia(pt->val+k);
-    p->child = pt->child;
-    pt->child = p;
     
-    pt->isTerminal=false ;//  not a word now
+    p->child=pt->child ;
+    pt->child=p ;
     
     char* a = (char*) malloc(sizeof(char)*(k+1));
     strncpy(a,pt->val,k);
     a[k]='\0';
     free(pt->val);
     pt->val = a;
+}
+
+
+int prefixPatricia(patriciaTrie pt ,char* word){
+    
+    /*
+     if(isEmptyPatricia(pt)) return  0 ;
+     
+     if(*pt->val!=*word) return prefixPatricia(pt->next,word); // k==0
+     int k=getPrefix(pt->val, word);
+     if(k==strlen(word)){
+     return //
+     }
+     
+     */
+    return  0 ;
     
     
 }
+
+
+
+

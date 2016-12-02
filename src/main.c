@@ -10,7 +10,7 @@
 void parcours(patriciaTrie pt){
     
     if (!isEmptyPatricia(pt)) {
-        printf("%s---%d\n",pt->val,pt->isTerminal);
+        printf("%s---%d\n",pt->val,isTerminal(pt));
         parcours(pt->child);
         parcours(pt->next);
     }
@@ -67,23 +67,23 @@ int main(){
     
     }
     
-    // printf("--------------\n");
-    // patriciaTrie pt = buildShakespearePT(directory);
+     printf("--------------\n");
+     patriciaTrie pt = buildShakespearePT(directory);
     
     
-    // if(!isEmptyPatricia(pt)) {
+     if(!isEmptyPatricia(pt)) {
         
-    //     printf("NbWords : %d \n",countWordPatricia(pt));
-    //     printf("nbNULL: %d\n", countNilPatricia(pt));
-    //     printf("heightHT: %d\n", heightPatricia(pt));
-    //     printf("search: %d\n", searchPatricia(pt, "enter"));
+            printf("NbWords : %d \n",countWordPatricia(pt));
+            printf("nbNULL: %d\n", countNilPatricia(pt));
+            printf("heightHT: %d\n", heightPatricia(pt));
+            printf("search: %d\n", searchPatricia(pt, "enter"));
         
         
-    // }
+        }
     
     
     
     freeHT(hybrid);
-    // freePatricia(pt);
+     freePatricia(pt);
     return 0 ;
 }

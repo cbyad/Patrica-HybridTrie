@@ -3,22 +3,11 @@
 #include <stdbool.h>
 #include <string.h>
 #include "word_list.h"
+#include "../include/hybrid_trie.h"
 
-
-//#define ALPHABET_SIZE 128
-
-
-/*
- le langage c definie de base le caractere '\0' comme caractere de fin de chaine.
- Donc pour eviter une confusion pour la terminaison d'un mot du trie patricia ,
- on choisira un autre caractere '$' pour reelement marqué cette difference.
- 
-*/
 
 typedef struct patricia_node {
     char* val;
-    bool isTerminal ;
-    
     struct patricia_node* next ;
     struct patricia_node* child;
 } *patriciaTrie;
@@ -28,18 +17,15 @@ typedef struct patricia_node {
 /****************
  * PRIMITIVES
  ****************/
-patriciaTrie newpatricia_aux( patriciaTrie child , patriciaTrie next , char* word);
+patriciaTrie newpatricia_aux( patriciaTrie child , patriciaTrie next , char* word); //ok
 
-bool isterminal (patriciaTrie pt){
-
-    return (int)strlen(pt->val)==0 ;
-}
+bool isTerminal(patriciaTrie pt);                                          //ok
 
 // Create a node with key as a key
-patriciaTrie newPatricia(char* word);//ok
+patriciaTrie newPatricia(char* word);                                       //ok
 
 // Insert a new word to a Patricia trie
-patriciaTrie insertPatricia(patriciaTrie pt ,char* mot);                    //ok mais bugger a revoir
+patriciaTrie insertPatricia(patriciaTrie pt ,char* mot);                    //ok
 
 //split a node 
 void split(patriciaTrie pt, int k);                                         //ok
@@ -82,6 +68,11 @@ int heightPatricia(patriciaTrie pt);                                     //ok
 
 //Merge 2 Patricia tries
 patriciaTrie mergePatricia(patriciaTrie pt1 ,patriciaTrie pt2);
+
+
+//patricia trie to hybrid
+HTptr patriciaToHybrid(patriciaTrie pt);
+
 
 #endif
 

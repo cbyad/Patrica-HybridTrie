@@ -23,7 +23,7 @@ HTptr newHybridTrie(char word, bool key, HTptr inf, HTptr eq, HTptr sup) {
 
 bool isEmptyHT(HTptr hybridTrie){
 
-    return (hybridTrie==NULL)?true: false ;
+    return (hybridTrie==NULL) ;
 }
 
 HTptr insertHT(HTptr hybridTrie, char* word) {

@@ -21,8 +21,6 @@ int getPrefix(char* stringA ,char* stringB){
     return sizeA ;
 }
 
-
-
 char* getPrefixString(char* stringA ,char* stringB){
     int sizeA =(int)strlen(stringA);
     int sizeB=(int) strlen(stringB);
@@ -55,43 +53,22 @@ char* getPrefixString(char* stringA ,char* stringB){
     
 }
 
+ void devAlgavAllTest(){
+    //
+ }
 
-// void devAlgavAllTest(){
+char* saisirChaine()
+{
+    char * str = NULL;
+    int c, nbcar = 0 ;
     
-//     int choix =0 ;
-//     printf("------DEVOIR DE PROGRAMMATION TRIE HYBRIDE & PATRICIA-------\n");
-
-//     printf("1.Charger Shapeskeare /n");
-//     scanf("%d",&choix);
-    
-    
-    
-//     switch (choix) {
-//         case 1:
-            
-//             break;
-            
-//         default:
-//             break;
-//     }
-    
-    
-    
-    
-    
-
-
-
-
-// }
-
-
-
-
-
-
-
-
-
-
-
+    while ((c = getchar())!= '\n')
+    {
+        str = (char*) realloc (str, (nbcar+1)* sizeof(char));
+        str [nbcar] = c;
+        nbcar++;
+    }
+    str = (char*) realloc (str, (nbcar+1)* sizeof(char));
+    str [nbcar] = '\0';
+    return str ;
+}

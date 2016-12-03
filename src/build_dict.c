@@ -47,7 +47,8 @@ patriciaTrie insertListPT(patriciaTrie pt , wlist list){
 
 
 patriciaTrie buildShakespearePT(char* directory){
-    
+    float final_time ;
+    clock_t beg , end ;
     patriciaTrie pt =NULL ;
     
     /* open the directory */
@@ -63,7 +64,7 @@ patriciaTrie buildShakespearePT(char* directory){
 
     char filepath[BUFF_SIZE]; /* store path to the current file */
 
-    
+    beg=clock();
     /* read all files in the directoty */
     while ( (dirEnt = readdir(pt_Dir)) ) {
         
@@ -92,7 +93,9 @@ patriciaTrie buildShakespearePT(char* directory){
         pt=insertListPT(pt, list);
        
     }
-    
+    end=clock() ;
+    final_time=end-beg ;
+    printf("time used for inserting all words in patricia --> %f seconds\n",(float)final_time/CLOCKS_PER_SEC);
     /* end  ---> close directory */
     if( closedir(pt_Dir) == -1 ){
         perror("Error: closedir\n");
@@ -106,7 +109,10 @@ patriciaTrie buildShakespearePT(char* directory){
 
 
 HTptr buildShakespeareHT( char* directory){
-
+    float final_time ;
+    clock_t beg ,end ;
+    
+    
     HTptr hybrid =NULL ;
     
     /* open the directory */
@@ -123,6 +129,7 @@ HTptr buildShakespeareHT( char* directory){
     char filepath[BUFF_SIZE]; /* store path to the current file */
     
     
+    beg=clock() ; //init
     /* read all files in the directoty */
     while ( (dirEnt = readdir(pt_Dir)) ) {
         
@@ -151,6 +158,9 @@ HTptr buildShakespeareHT( char* directory){
        hybrid= insertListHT(hybrid, list);
         
     }
+    end=clock() ;
+    final_time=end-beg ;
+    printf("time used for inserting all words in Hybrid --> %f seconds \n",(float)final_time/CLOCKS_PER_SEC);
     
     /* end  ---> close directory */
     if( closedir(pt_Dir) == -1 ){

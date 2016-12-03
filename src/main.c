@@ -42,48 +42,85 @@ void parcoursHT(HTptr pt) {
 }
 
 int main(){
-
+/*
      char * directory ="/Users/cb_mac/Desktop/UPMC/SEMESTRE1/ALGAV/dev/Shakespeare" ;
-    // char * directory ="Shakespeare" ;
-  // char* path = "example/basic";
+     char * directory ="Shakespeare" ;
+ */
+    char * directory ="/Users/cb_mac/Desktop/UPMC/SEMESTRE1/ALGAV/dev/Shakespeare" ;
+    HTptr hybrid = NULL;
+    patriciaTrie pt =NULL;
+    int choix ;
+    char* continuer="oui";
     
-   // wlist basic = read_dict(path);
+    printf("-------------------------------[DEVOIR DE PROGRAMMATION TRIE HYBRIDE & PATRICIA]---------------------------------\n");
     
-    //HTptr hybrid = NULL;
-   // hybrid = insertListHT(hybrid, basic);
     
-    // parcoursHT(hybrid);
-     HTptr hybrid =buildShakespeareHT(directory);
-    
-   // wlist tmp = wordListHT(hybrid);
-   // printList(tmp);
-    if(!isEmptyHT(hybrid)) {
+    while (strcmp(continuer,"oui")==0)
+    {
         
-        printf("NbWords : %d \n",countwHT(hybrid));
-        printf("nbNULL: %d\n", nbNULLHT(hybrid));
-        printf("heightHT: %d\n", heightHT(hybrid));
-        printf("search: %d\n", searchHT(hybrid, "enter"));
+        printf("1. Chargements des Tries & info \n2.Recherche \n3. Insertion \n4. Liste de mots \n5. Suppresion..\n" );
+        printf("Saisir une operation ---> \t");
         
-    
+        scanf("%d",&choix);
+        switch(choix)
+        {
+            case 1:
+            {
+                 pt = buildShakespearePT(directory);
+                hybrid=buildShakespeareHT(directory);
+                if(!isEmptyHT(hybrid)) {
+                    
+                    printf("-------Hybrid--------\n");
+                    printf("NbWords : %d \n",countwHT(hybrid));
+                    printf("nbNULL: %d\n", nbNULLHT(hybrid));
+                    printf("heightHT: %d\n", heightHT(hybrid));
+                }
+                
+                if(!isEmptyPatricia(pt)) {
+                    printf("-------patricia--------\n");
+                    printf("NbWords : %d \n",countWordPatricia(pt));
+                    printf("nbNULL: %d\n", countNilPatricia(pt));
+                    printf("heightHT: %d\n", heightPatricia(pt));
+                }
+            }
+                break;
+            case 2:
+            {
+                printf("saisir le mot a rechercher  ----> \t");
+                getchar();
+                char* mot =saisirChaine();
+                printf("result search ---> hybrid: %d\n", searchHT(hybrid, mot));
+                printf("result search ---> patricia: %d\n", searchPatricia(pt, mot));
+                
+            }
+                break;
+            case 3:
+                
+                break;
+            case 4 :
+                
+                break;
+            case 5:
+                
+                break;
+            case 6:
+                
+                break;
+            default:
+                printf("Commande entree incorrecte" );
+                break;
+                
+        }
+        printf("Voulez vous effectuer une autre action sur les structures ? oui||non \n") ;
+        getchar();
+        continuer=saisirChaine();
+        
     }
     
-     printf("--------------\n");
-     patriciaTrie pt = buildShakespearePT(directory);
-    
-    
-     if(!isEmptyPatricia(pt)) {
-        
-            printf("NbWords : %d \n",countWordPatricia(pt));
-            printf("nbNULL: %d\n", countNilPatricia(pt));
-            printf("heightHT: %d\n", heightPatricia(pt));
-            printf("search: %d\n", searchPatricia(pt, "enter"));
-        
-        
-        }
-    
-    
-    
+    //-------------------LIBERATION TOTALE DE LA MEMOIRE UTILISEE DANS LES STRUCTURES---------------------
     freeHT(hybrid);
-     freePatricia(pt);
+    freePatricia(pt);
+    //---------------------------------------------------------------------------------------------------
+    
     return 0 ;
 }

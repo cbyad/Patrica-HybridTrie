@@ -13,8 +13,7 @@
 //new ----added for import all files from Shakespeare
 #define _XOPEN_SOUCE 700
 
-
-
+#include <time.h>
 #include <string.h>
 #include <sys/types.h>
 #include <sys/stat.h>

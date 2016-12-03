@@ -16,4 +16,5 @@ int getPrefix(char* stringA ,char* stringB);                //ok
 char* getPrefixString(char* stringA ,char* stringB);        //ok
 
 void devAlgavAllTest();
+char* saisirChaine() ;
 #endif

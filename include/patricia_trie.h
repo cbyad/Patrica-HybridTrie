@@ -53,6 +53,9 @@ wlist listWords(patriciaTrie pt);
 // Count NULL pointers in patricia trie
 int countNilPatricia(patriciaTrie pt);                                     //ok
 
+
+
+void averageInside(patriciaTrie pt, int * deph, int * total, int Cdepth); //useful for computing averagedepth
 // Return average patricia trie depth
 int averageDepthPatricia(patriciaTrie pt);
 

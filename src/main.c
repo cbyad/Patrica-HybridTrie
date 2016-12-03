@@ -58,22 +58,23 @@ int main(){
     while (strcmp(continuer,"oui")==0)
     {
         
-        printf("1. Chargements des Tries & info \n2.Recherche \n3. Insertion \n4. Liste de mots \n5. Suppresion..\n" );
+        printf("1. Chargements des Tries & info \n2.Recherche \n3. Insertion \n4.Nbre prefix \n5. Suppresion..\n" );
         printf("Saisir une operation ---> \t");
-        
         scanf("%d",&choix);
+        printf("-----------------------------------\n");
         switch(choix)
         {
             case 1:
             {
-                 pt = buildShakespearePT(directory);
+                pt = buildShakespearePT(directory);
                 hybrid=buildShakespeareHT(directory);
                 if(!isEmptyHT(hybrid)) {
-                    
+                
                     printf("-------Hybrid--------\n");
                     printf("NbWords : %d \n",countwHT(hybrid));
                     printf("nbNULL: %d\n", nbNULLHT(hybrid));
                     printf("heightHT: %d\n", heightHT(hybrid));
+                    printf("AverageDeph: %d \n",depthAvgHT(hybrid));
                 }
                 
                 if(!isEmptyPatricia(pt)) {
@@ -81,6 +82,7 @@ int main(){
                     printf("NbWords : %d \n",countWordPatricia(pt));
                     printf("nbNULL: %d\n", countNilPatricia(pt));
                     printf("heightHT: %d\n", heightPatricia(pt));
+                    printf("AverageDeph: %d \n",averageDepthPatricia(pt));
                 }
             }
                 break;
@@ -95,10 +97,25 @@ int main(){
             }
                 break;
             case 3:
-                
+            {
+                printf("saisir le mot a inserer  ----> \t");
+                getchar();
+                char* mot =saisirChaine();
+                pt=insertPatricia(pt, mot);
+                hybrid=insertHT(hybrid, mot);
+
+            }
                 break;
             case 4 :
+            {
+                printf("saisir le mot  ----> \t");
+                getchar();
+                char* mot =saisirChaine();
                 
+                printf("result nombre de mot prefix ---> hybrid: %d\n", nbPrefixHT(hybrid, mot));
+                printf("result nombre de mot prefix  ---> patricia: %d\n", prefixPatricia(pt, mot));
+            
+            }
                 break;
             case 5:
                 

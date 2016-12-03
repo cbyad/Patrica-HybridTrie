@@ -160,17 +160,33 @@ int prefixPatricia(patriciaTrie pt ,char* word){
      if(isEmptyPatricia(pt)) return  0 ;
      
      if(*pt->val!=*word) return prefixPatricia(pt->next,word); // k==0
-     int k=getPrefix(pt->val, word);
-     if(k==strlen(word)){
-     return //
-     }
-     
-     */
-    return  0 ;
     
+    if(*pt->val==*word && isTerminal(pt->child)) return countWordPatricia(pt);
+    
+    else return prefixPatricia(pt->child, word);
+     
+*/
+    return 0 ;
+}
+
+
+int averageDepthPatricia(patriciaTrie pt){
+    
+    int  deph = 0, total = 0, Cdepth = 1;
+    averageInside(pt, &deph, &total, Cdepth);
+    if(total == 0) return 0.0;
+    return deph / total;
     
 }
 
+void averageInside(patriciaTrie pt, int * deph, int * total, int Cdepth){
+    
+    if(isEmptyPatricia(pt)) return;
+    (*deph) =(*deph)+ Cdepth;
+    (*total)++;
+    if(!isEmptyPatricia(pt->child)) averageInside(pt->child, deph, total, Cdepth + 1);
+    if(!isEmptyPatricia(pt->next)) averageInside(pt->next, deph, total, Cdepth);
+}
 
 
 

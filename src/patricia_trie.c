@@ -154,20 +154,20 @@ void split(patriciaTrie pt, int k)
 }
 
 
-int prefixPatricia(patriciaTrie pt ,char* word){
+// int prefixPatricia(patriciaTrie pt ,char* word){
     
-    /*
-     if(isEmptyPatricia(pt)) return  0 ;
+    
+//      if(isEmptyPatricia(pt)) return  0 ;
      
-     if(*pt->val!=*word) return prefixPatricia(pt->next,word); // k==0
+//      if(*pt->val!=*word) return prefixPatricia(pt->next,word); // k==0
     
-    if(*pt->val==*word && isTerminal(pt->child)) return countWordPatricia(pt);
+//     if(*pt->val==*word && isTerminal(pt->child)) return countWordPatricia(pt);
     
-    else return prefixPatricia(pt->child, word);
+//     else return prefixPatricia(pt->child, word);
      
-*/
-    return 0 ;
-}
+    
+//     return 0 ;
+// }
 
 
 int averageDepthPatricia(patriciaTrie pt){

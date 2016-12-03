@@ -29,6 +29,12 @@ HTptr insertListHT(HTptr hybridTrie, wlist list) {
   return hybridTrie;
 }
 
+HTptr balancedInsertListHT(HTptr hybridTrie, wlist list) {
+    for (wlist tmp = list->next; tmp != list; tmp = tmp->next)
+      hybridTrie = balancedInsertHT(hybridTrie, tmp->word);
+    return hybridTrie;
+}
+
 HTptr removeListHT(HTptr hybridTrie, wlist list) {
   for (wlist tmp = list->next; tmp != list; tmp = tmp->next)
     hybridTrie = removeHT(hybridTrie, tmp->word);

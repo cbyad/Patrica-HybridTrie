@@ -31,23 +31,27 @@
  * words by a new line
  **************************/
 
-// Return word list from text file path
+/* Return word list from text file path */
 wlist read_dict(char* path);
 
-// Insert words from wlist into hybrid trie
+/* Insert words from wlist into hybrid trie */
 HTptr insertListHT(HTptr hybridTrie, wlist list);
 
-// Remove words from wlist of hybrid trie
+/* Insert words from wlist into hybrid trie + balancing */
+HTptr balancedInsertListHT(HTptr hybridTrie, wlist list);
+
+/* Remove words from wlist of hybrid trie */
 HTptr removeListHT(HTptr hybridTrie, wlist list);
 
-//insert all files from Shakespeare to hybrid
+/* insert all files from Shakespeare to hybrid */
 HTptr buildShakespeareHT(char* directory);
 
-/*----------------------------------------------------------*/
-// Insert  words from wlist into patricia
+/*******************************************************/
+
+/* Insert  words from wlist into patricia */
 patriciaTrie insertListPT(patriciaTrie pt , wlist list);
 
-//insert all files from Shakespeare to patricia
+/*insert all files from Shakespeare to patricia */
 patriciaTrie buildShakespearePT(char* directory);
 
 

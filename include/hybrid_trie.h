@@ -66,22 +66,23 @@ int depthAvgHT(HTptr hybridTrie);
 /* Count word prefix from word */
 int nbPrefixHT(HTptr hybridTrie, char* word);
 
-/* Remove word from hybrid trie
- * WARNING: this function may return an unbalanced hybrid trie */
+/* Remove word from hybrid trie */
 HTptr removeHT(HTptr hybridTrie, char* word);
 
 /********************
  * COMPLEX FUNCTIONS
  *******************/
 
-/* Return true if hybridTrie is balanced */
-bool isBalanced(HTptr hybridTrie);
+/* Balancing algorithm by rotation on a SINGLE node */
+HTptr balanceHT(HTptr hybridTrie);
 
+/* Criteria for balancing */
 int countInfChild(HTptr hybridTrie);
 
+/* Criteria for balancing */
 int countSupChild(HTptr hybridTrie);
 
 /* Insert a new word to an hybrid trie + balancing */
-HTptr insertHT(HTptr hybridTrie, char* word);
+HTptr balancedInsertHT(HTptr hybridTrie, char* word);
 
 #endif

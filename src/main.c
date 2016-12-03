@@ -42,25 +42,42 @@ void parcoursHT(HTptr pt) {
 }
 
 int main(){
-/*
-     char * directory ="/Users/cb_mac/Desktop/UPMC/SEMESTRE1/ALGAV/dev/Shakespeare" ;
-     char * directory ="Shakespeare" ;
- */
-    char * directory ="/Users/cb_mac/Desktop/UPMC/SEMESTRE1/ALGAV/dev/Shakespeare" ;
+
+  // char * directory ="/Users/cb_mac/Desktop/UPMC/SEMESTRE1/ALGAV/dev/Shakespeare" ;
+  char * directory ="Shakespeare";
+
+  // char* path = "example/basic";
+
+  // wlist basic = read_dict(path);
+  // HTptr hybrid = NULL;
+  // hybrid = insertListHT(hybrid, basic);
+  // parcoursHT(hybrid);
+
+  // if(!isEmptyHT(hybrid)) {
+  //   printf("-------Hybrid--------\n");
+  //   printf("NbWords : %d \n",countwHT(hybrid));
+  //   printf("nbNULL: %d\n", nbNULLHT(hybrid));
+  //   printf("heightHT: %d\n", heightHT(hybrid));
+  //   printf("AverageDeph: %d \n",depthAvgHT(hybrid));
+  // }
+
     HTptr hybrid = NULL;
     patriciaTrie pt =NULL;
     int choix ;
     char* continuer="oui";
     
     printf("-------------------------------[DEVOIR DE PROGRAMMATION TRIE HYBRIDE & PATRICIA]---------------------------------\n");
-    
+
     
     while (strcmp(continuer,"oui")==0)
     {
         
-        printf("1. Chargements des Tries & info \n2.Recherche \n3. Insertion \n4.Nbre prefix \n5. Suppresion..\n" );
-        printf("Saisir une operation ---> \t");
-        scanf("%d",&choix);
+        printf("1. Chargements des Tries & info \n2.Recherche \n3. Insertion \n4.Nbre prefix \n5. Suppression..\n" );
+        printf("Saisir une opération ---> \t");
+        if (scanf("%d",&choix) == EOF) {
+          perror("scanf");
+          return errno;
+        }
         printf("-----------------------------------\n");
         switch(choix)
         {
@@ -113,7 +130,7 @@ int main(){
                 char* mot =saisirChaine();
                 
                 printf("result nombre de mot prefix ---> hybrid: %d\n", nbPrefixHT(hybrid, mot));
-                printf("result nombre de mot prefix  ---> patricia: %d\n", prefixPatricia(pt, mot));
+                // printf("result nombre de mot prefix  ---> patricia: %d\n", prefixPatricia(pt, mot));
             
             }
                 break;
@@ -131,13 +148,12 @@ int main(){
         printf("Voulez vous effectuer une autre action sur les structures ? oui||non \n") ;
         getchar();
         continuer=saisirChaine();
-        
     }
     
-    //-------------------LIBERATION TOTALE DE LA MEMOIRE UTILISEE DANS LES STRUCTURES---------------------
+    // -------------------LIBERATION TOTALE DE LA MEMOIRE UTILISEE DANS LES STRUCTURES---------------------
     freeHT(hybrid);
     freePatricia(pt);
-    //---------------------------------------------------------------------------------------------------
-    
+    // ---------------------------------------------------------------------------------------------------
+
     return 0 ;
 }

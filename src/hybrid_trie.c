@@ -221,17 +221,38 @@ HTptr removeHT(HTptr hybridTrie, char* word) {
  * COMPLEX FUNCTIONS *
  ********************/
 
-bool isBalanced(HTptr hybridTrie) {
-  if (hybridTrie == NULL)
-    return true;
+HTptr balanceHT(HTptr hybridTrie) {
+  int nbInf, nbSup;
+  nbInf = countInfChild(hybridTrie);
+  nbSup = countSupChild(hybridTrie);
 
-  if (hybridTrie->inf == NULL && hybridTrie->sup == NULL)
-    return true;
+  HTptr pt, tmp;
+  pt = hybridTrie;
 
-  if (abs(countInfChild(hybridTrie) - countSupChild(hybridTrie)) > 1)
-    return false;
-
-  return isBalanced(hybridTrie->inf) || isBalanced(hybridTrie->eq) || isBalanced(hybridTrie->sup);
+  /* balancing criteria */
+  while (abs(nbInf - nbSup) > 1) {
+    /* RIGHT ROTATE */
+    if (nbInf > nbSup) {
+      printf("RIGHT\n");
+      tmp = pt;
+      pt = pt->inf;
+      tmp->inf = pt->sup;
+      pt->sup = tmp;
+      nbInf--;
+      nbSup++;
+    }
+    /* LEFT ROTATE */
+    else if (nbInf < nbSup) {
+      printf("LEFT\n");
+      tmp = pt;
+      pt = pt->sup;
+      tmp->sup = pt->inf;
+      pt->inf = tmp;
+      nbInf++;
+      nbSup--;
+    }
+  }
+  return pt;
 }
 
 int countInfChild(HTptr hybridTrie) {
@@ -251,5 +272,30 @@ int countSupChild(HTptr hybridTrie) {
   if (hybridTrie->sup == NULL)
     return 0;
 
-  return 1 + countInfChild(hybridTrie->sup);
+  return 1 + countSupChild(hybridTrie->sup);
+}
+
+HTptr balancedInsertHT(HTptr hybridTrie, char *word) {
+  if (hybridTrie == NULL) {
+    hybridTrie = newHybridTrie(*word, false, NULL, NULL, NULL);
+  }
+
+  if (*word < hybridTrie->key) {
+    hybridTrie->inf = insertHT(hybridTrie->inf, word);
+    hybridTrie = balanceHT(hybridTrie);
+  }
+
+  else if (*word > hybridTrie->key) {
+    hybridTrie->sup = insertHT(hybridTrie->sup, word);
+    hybridTrie = balanceHT(hybridTrie);
+  }
+
+  else {
+    if (*(word+1) == 0)
+      hybridTrie->isKey = true;
+    else
+      hybridTrie->eq = insertHT(hybridTrie->eq, ++word);
+  }
+
+  return hybridTrie;
 }

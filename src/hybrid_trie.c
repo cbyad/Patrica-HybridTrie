@@ -160,8 +160,14 @@ int nbPrefixHT(HTptr hybridTrie, char* word) {
   if (*word == 0)
     return countwHT(hybridTrie);
 
-  if (*(word+1) == 0)
-    return countwHT(hybridTrie);
+  if (*(word+1) == 0) {
+    if (*word > hybridTrie->key) 
+      return countwHT(hybridTrie->sup);
+    else if (*word < hybridTrie->key)
+      return countwHT(hybridTrie->inf);
+    else
+      return countwHT(hybridTrie->eq);
+  }
 
   if (*word < hybridTrie->key)
     return nbPrefixHT(hybridTrie->inf, word);

@@ -87,8 +87,7 @@ bool searchHT(HTptr hybridTrie, char* word) {
 int countwHT(HTptr hybridTrie) {
   if (hybridTrie == NULL)
     return 0;
-  int n = hybridTrie->isKey;
-  return n + countwHT(hybridTrie->inf) + countwHT(hybridTrie->eq) + countwHT(hybridTrie->sup);
+  return hybridTrie->isKey + countwHT(hybridTrie->inf) + countwHT(hybridTrie->eq) + countwHT(hybridTrie->sup);
 }
 
 wlist wordListHT_aux(HTptr hybridTrie, wlist list, char* word) {
@@ -157,26 +156,18 @@ int depthAvgHT(HTptr hybridTrie) {
 
 
 int nbPrefixHT(HTptr hybridTrie, char* word) {
-  if (*word == 0)
-    return countwHT(hybridTrie);
-
-  if (*(word+1) == 0) {
-    if (*word > hybridTrie->key) 
-      return countwHT(hybridTrie->sup);
-    else if (*word < hybridTrie->key)
-      return countwHT(hybridTrie->inf);
-    else
-      return countwHT(hybridTrie->eq);
-  }
+  if (hybridTrie == NULL)
+    return 0;
 
   if (*word < hybridTrie->key)
     return nbPrefixHT(hybridTrie->inf, word);
 
-  else if (*word > hybridTrie->key)
+  if (*word > hybridTrie->key)
     return nbPrefixHT(hybridTrie->sup, word);
 
-  else 
-    return nbPrefixHT(hybridTrie->eq, ++word);
+  if (*(word+1) == 0)
+    return countwHT(hybridTrie);
+  return nbPrefixHT(hybridTrie->eq, ++word);
 }
 
 HTptr removeHT(HTptr hybridTrie, char* word) {

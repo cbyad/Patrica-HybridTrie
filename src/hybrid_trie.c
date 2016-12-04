@@ -158,7 +158,10 @@ int depthAvgHT(HTptr hybridTrie) {
 
 int nbPrefixHT(HTptr hybridTrie, char* word) {
   if (*word == 0)
-    return hybridTrie->isKey + countwHT(hybridTrie);
+    return countwHT(hybridTrie);
+
+  if (*(word+1) == 0)
+    return countwHT(hybridTrie);
 
   if (*word < hybridTrie->key)
     return nbPrefixHT(hybridTrie->inf, word);

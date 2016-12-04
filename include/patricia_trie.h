@@ -76,6 +76,9 @@ patriciaTrie mergePatricia(patriciaTrie pt1 ,patriciaTrie pt2);
 //patricia trie to hybrid
 HTptr patriciaToHybrid(patriciaTrie pt);
 
+/* hybrid to patricia */
+patriciaTrie hybrid2patricia(HTptr hybridTrie);
+
 
 #endif
 

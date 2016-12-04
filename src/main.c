@@ -46,7 +46,7 @@ int main(){
   // char * directory ="/Users/cb_mac/Desktop/UPMC/SEMESTRE1/ALGAV/dev/Shakespeare" ;
   char * directory ="Shakespeare";
 
-  // char* path = "example/basic";
+  // char* path = "example/test";
 
   // wlist basic = read_dict(path);
   // HTptr hybrid = NULL;
@@ -59,6 +59,7 @@ int main(){
   //   printf("nbNULL: %d\n", nbNULLHT(hybrid));
   //   printf("heightHT: %d\n", heightHT(hybrid));
   //   printf("AverageDeph: %d \n",depthAvgHT(hybrid));
+  //   printf("Prefix: %d\n", nbPrefixHT(hybrid, "tes"));
   // }
 
     HTptr hybrid = NULL;

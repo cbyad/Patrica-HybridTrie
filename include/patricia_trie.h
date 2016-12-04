@@ -55,9 +55,9 @@ int countNilPatricia(patriciaTrie pt);                                     //ok
 
 
 
-void averageInside(patriciaTrie pt, int * deph, int * total, int Cdepth); //useful for computing averagedepth
+void averageInside(patriciaTrie pt, int * deph, int * total, int Cdepth); //useful for computing averagedepth       //ok
 // Return average patricia trie depth
-int averageDepthPatricia(patriciaTrie pt);
+int averageDepthPatricia(patriciaTrie pt);                                  //ok
 
 // Count word prefix from word
 int prefixPatricia(patriciaTrie pt ,char* mot);

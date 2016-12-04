@@ -155,19 +155,25 @@ void split(patriciaTrie pt, int k)
 
 
 // int prefixPatricia(patriciaTrie pt ,char* word){
-    
-    
-//      if(isEmptyPatricia(pt)) return  0 ;
+    /*
+     if(isEmptyPatricia(pt)) return 0;
+     int k = getPrefix(pt->val, word);
+     char* prefC=getPrefixString(pt->val, word);
+     if(k==0) return prefixPatricia(pt->next, word);
      
-//      if(*pt->val!=*word) return prefixPatricia(pt->next,word); // k==0
-    
-//     if(*pt->val==*word && isTerminal(pt->child)) return countWordPatricia(pt);
-    
-//     else return prefixPatricia(pt->child, word);
+     if(strcmp(prefC,pt->val)==0 ) return countWordPatricia(pt->child);
      
-    
-//     return 0 ;
-// }
+     if (k!=0) {
+         
+         if(strlen(pt->val)<strlen(word)) return countWordPatricia(pt->child->next);
+         if(strlen(pt->val)>strlen(word)) return countWordPatricia(pt->child);
+     }
+
+  
+     return 0 ;
+
+    */
+ //}
 
 
 int averageDepthPatricia(patriciaTrie pt){
@@ -187,6 +193,11 @@ void averageInside(patriciaTrie pt, int * deph, int * total, int Cdepth){
     if(!isEmptyPatricia(pt->child)) averageInside(pt->child, deph, total, Cdepth + 1);
     if(!isEmptyPatricia(pt->next)) averageInside(pt->next, deph, total, Cdepth);
 }
+patriciaTrie mergePatricia(patriciaTrie pt1 ,patriciaTrie pt2){
+    if(isEmptyPatricia(pt1)) return pt2 ;
+    if(isEmptyPatricia(pt2)) return pt1;
 
-
-
+    return NULL ;
+    
+    /////
+}

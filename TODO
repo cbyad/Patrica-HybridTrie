@@ -1,19 +1,11 @@
 *MENU: corriger boucle
 *Trie hybride: Conversion vers patricia
+*HYBRID:corriger la fonction de calcul nombre prefix  n'est pas correct
 
 /*----------------------- trie patricia  -------------------*/
 
 *Fonction qui liste les mots du dictionnaire dans l'ordre alphabetique
-*Fonction calculant la profondeur moyenne des feuilles du trie patrica
 *Fonction qui calcul de combien de mot du dictionnaire  un mot(quelconque) est prefixe
 *Fonction qui supprime un mot de la structure
-
-
 *Fonction qui fusionne deux patricia-tries
-
-/*----------------------- trie patricia & trie hybride -------------------*/
-
-
-
-*Fonction qui transforme un trie hybride en trie patricia --------> commun
-*Fonction qui transforme un trie patricia en trie hybride --------> commun
+*Fonction qui transforme un trie patricia en trie hybride

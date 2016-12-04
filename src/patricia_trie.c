@@ -56,7 +56,7 @@ bool isEmptyPatricia(patriciaTrie pt){
 
 patriciaTrie insertPatricia(patriciaTrie pt ,char* word)  {
     
-    if(isEmptyPatricia(pt)) return  newPatricia_aux(newPatricia("\0"), NULL, word);
+    if(isEmptyPatricia(pt)) return newPatricia_aux(newPatricia("\0"), NULL, word);
     if(strlen(word)==0) return pt; //don't insert blank space
     
     if ( strcmp(pt->val,word)==0 && isTerminal(pt->child)) {
@@ -69,18 +69,18 @@ patriciaTrie insertPatricia(patriciaTrie pt ,char* word)  {
     
     if(k==0) pt->next=insertPatricia(pt->next,word);
     
-    else if (sizeWord>sizeRoot) {           // example:                 ap | --> apple
+    else if (sizeWord>sizeRoot) {                                                                       //                 ap | --> apple
         
         if (k==sizeRoot) {
-            pt->child=insertPatricia(pt->child, word+k);  //
+            pt->child=insertPatricia(pt->child, word+k);
         }
         
-        else if(k<sizeRoot){       //example                            apT  | -->apple
+        else if(k<sizeRoot){                                                                            //                 apT  | -->apple
             split(pt, k);
             pt->child=insertPatricia(pt->child, word+k);
         }
     }
-    else if (sizeWord<sizeRoot ) { //example                           apple | ---> ap
+    else if (sizeWord<sizeRoot ) {                                                                      //                  apple | ---> ap
         
         if (k==sizeWord) {
             split(pt, k);
@@ -91,9 +91,9 @@ patriciaTrie insertPatricia(patriciaTrie pt ,char* word)  {
             pt->child=insertPatricia(pt->child, word+k);
         }
     }
-    else if (sizeRoot==sizeWord) {
+    else if (sizeRoot==sizeWord) {                                                                      //                  balle | ---> bille
         
-        if(k==sizeWord && !isTerminal(pt->child)){
+        if(k==sizeWord && !isTerminal(pt->child)){                                                      //                  balle | ---> balle
             patriciaTrie p =newPatricia("\0");
             p->next=pt->child;
             pt->child=p ;
@@ -111,7 +111,6 @@ patriciaTrie insertPatricia(patriciaTrie pt ,char* word)  {
 void split(patriciaTrie pt, int k)
 {
     patriciaTrie p = newPatricia(pt->val+k);
-    
     p->child=pt->child ;
     pt->child=p ;
     
@@ -146,7 +145,6 @@ int countNilPatricia(patriciaTrie pt){
 
 // size is caracterized by size of the longest children
 int heightPatricia(patriciaTrie pt){
-    
     return isEmptyPatricia(pt)?-1 : max3(1+heightPatricia(pt->child), heightPatricia(pt->next), -1);
 }
 
@@ -160,7 +158,7 @@ int nbPrefixPatricia(patriciaTrie pt ,char* word){
     
     if(isEmptyPatricia(pt)) return 0;
     if(*word==0) return countWordPatricia(pt);
-
+    
     int k = getPrefix(pt->val,word);
     if(k==0) return nbPrefixPatricia(pt->next,word);
     if(strcmp(word,pt->val)==0) return countWordPatricia(pt->child);

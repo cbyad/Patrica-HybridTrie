@@ -1,6 +1,5 @@
 *MENU: corriger boucle
 *Trie hybride: Conversion vers patricia
-*HYBRID:corriger la fonction de calcul nombre prefix  n'est pas correct
 
 /*----------------------- trie patricia  -------------------*/
 

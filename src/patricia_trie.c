@@ -56,33 +56,7 @@ bool isEmptyPatricia(patriciaTrie pt){
     return (pt==NULL)  ;
 }
 
-bool searchPatricia(patriciaTrie pt ,char* word){
-    if (isEmptyPatricia(pt)) return false ;
-    
-    int result= getPrefix(word, pt->val);
-    if(result==0) return searchPatricia(pt->next, word);
-    if(result==(int)strlen(word) && isTerminal(pt->child) ) return true ;
-    if(result==(int)strlen(pt->val)) return searchPatricia(pt->child,word+result);
-    
-    return false ;
-}
 
-
-int countNilPatricia(patriciaTrie pt){
-    return (pt==NULL)?1:countNilPatricia(pt->child)+countNilPatricia(pt->next);
-}
-
-
-// size is caracterized by size of the longest children
-int heightPatricia(patriciaTrie pt){
-    
-    return isEmptyPatricia(pt)?-1 : max3(1+heightPatricia(pt->child), heightPatricia(pt->next), -1);
-}
-
-int countWordPatricia(patriciaTrie pt) {
-    
-    return (pt == NULL)? 0: (int)isTerminal(pt) + countWordPatricia(pt->child) + countWordPatricia(pt->next);
-}
 
 
 patriciaTrie insertPatricia(patriciaTrie pt ,char* word)  {
@@ -154,26 +128,52 @@ void split(patriciaTrie pt, int k)
 }
 
 
-// int prefixPatricia(patriciaTrie pt ,char* word){
-    /*
-     if(isEmptyPatricia(pt)) return 0;
-     int k = getPrefix(pt->val, word);
-     char* prefC=getPrefixString(pt->val, word);
-     if(k==0) return prefixPatricia(pt->next, word);
-     
-     if(strcmp(prefC,pt->val)==0 ) return countWordPatricia(pt->child);
-     
-     if (k!=0) {
-         
-         if(strlen(pt->val)<strlen(word)) return countWordPatricia(pt->child->next);
-         if(strlen(pt->val)>strlen(word)) return countWordPatricia(pt->child);
-     }
+/*********************
+ * ADVANCED FUNCTIONS
+ *********************/
 
-  
-     return 0 ;
+bool searchPatricia(patriciaTrie pt ,char* word){
+    if (isEmptyPatricia(pt)) return false ;
+    
+    int result= getPrefix(word, pt->val);
+    if(result==0) return searchPatricia(pt->next, word);
+    if(result==(int)strlen(word) && isTerminal(pt->child) ) return true ;
+    if(result==(int)strlen(pt->val)) return searchPatricia(pt->child,word+result);
+    
+    return false ;
+}
 
-    */
- //}
+
+int countNilPatricia(patriciaTrie pt){
+    return (pt==NULL)?1:countNilPatricia(pt->child)+countNilPatricia(pt->next);
+}
+
+
+// size is caracterized by size of the longest children
+int heightPatricia(patriciaTrie pt){
+    
+    return isEmptyPatricia(pt)?-1 : max3(1+heightPatricia(pt->child), heightPatricia(pt->next), -1);
+}
+
+int countWordPatricia(patriciaTrie pt) {
+    
+    return (pt == NULL)? 0: (int)isTerminal(pt) + countWordPatricia(pt->child) + countWordPatricia(pt->next);
+}
+
+
+
+int nbPrefixPatricia(patriciaTrie pt ,char* word){
+    
+    if(*word==0) return countWordPatricia(pt);
+    if(isEmptyPatricia(pt)) return 0;
+    
+    int k = getPrefix(pt->val,word);
+    if(k==0) return nbPrefixPatricia(pt->next,word);
+    
+    if(strcmp(word,pt->val)==0) return countWordPatricia(pt->child);
+    
+    return nbPrefixPatricia(pt->child, word+k);
+}
 
 
 int averageDepthPatricia(patriciaTrie pt){
@@ -193,11 +193,15 @@ void averageInside(patriciaTrie pt, int * deph, int * total, int Cdepth){
     if(!isEmptyPatricia(pt->child)) averageInside(pt->child, deph, total, Cdepth + 1);
     if(!isEmptyPatricia(pt->next)) averageInside(pt->next, deph, total, Cdepth);
 }
+
 patriciaTrie mergePatricia(patriciaTrie pt1 ,patriciaTrie pt2){
     if(isEmptyPatricia(pt1)) return pt2 ;
     if(isEmptyPatricia(pt2)) return pt1;
-
+    
     return NULL ;
     
     /////
 }
+
+
+

@@ -60,7 +60,7 @@ void averageInside(patriciaTrie pt, int * deph, int * total, int Cdepth); //usef
 int averageDepthPatricia(patriciaTrie pt);                                  //ok
 
 // Count word prefix from word
-int prefixPatricia(patriciaTrie pt ,char* mot);
+int nbPrefixPatricia(patriciaTrie pt ,char* mot);                            //ok
 
 void join(patriciaTrie pt );
 // Remove word from hybrid trie

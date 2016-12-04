@@ -40,7 +40,7 @@ void parcoursHT(HTptr pt) {
   parcoursHT(pt->eq);
   parcoursHT(pt->sup);
 }
-
+/*
 int main(){
 
   // char * directory ="/Users/cb_mac/Desktop/UPMC/SEMESTRE1/ALGAV/dev/Shakespeare" ;
@@ -158,3 +158,56 @@ int main(){
 
     return 0 ;
 }
+ */
+
+
+
+
+int main(){
+    
+    
+    
+    
+    
+    char* path = "/Users/cb_mac/Desktop/UPMC/SEMESTRE1/ALGAV/dev/dev_algav/dev_algav_trie/dev_algav_trie/algav/example/basic";
+    
+    wlist basic = read_dict(path);
+    HTptr hybrid = NULL;
+    hybrid = insertListHT(hybrid, basic);
+    patriciaTrie pt = NULL ;
+    pt=insertListPT(pt, basic);
+    
+    if(!isEmptyHT(hybrid)) {
+        
+        parcoursHT(hybrid);
+        printf("-------Hybrid--------\n");
+        printf("NbWords : %d \n",countwHT(hybrid));
+        printf("nbNULL: %d\n", nbNULLHT(hybrid));
+        printf("heightHT: %d\n", heightHT(hybrid));
+        printf("AverageDeph: %d \n",depthAvgHT(hybrid));
+        printf("result nombre de mot prefix ---> hybrid: %d\n", nbPrefixHT(hybrid, "z"));
+        
+    }
+    
+    if(!isEmptyPatricia(pt)) {
+        printf("-------patricia--------\n");
+        printf("NbWords : %d \n",countWordPatricia(pt));
+        printf("nbNULL: %d\n", countNilPatricia(pt));
+        printf("heightHT: %d\n", heightPatricia(pt));
+        printf("AverageDeph: %d \n",averageDepthPatricia(pt));
+        printf("result nombre de mot prefix  ---> patricia: %d\n", nbPrefixPatricia(pt, "z"));
+
+    }
+    
+    
+    freePatricia(pt);
+    freeHT(hybrid);
+    
+    
+    
+
+    return  0;
+    
+}
+ 
+ 

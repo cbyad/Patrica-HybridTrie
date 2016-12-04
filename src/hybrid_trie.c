@@ -156,6 +156,7 @@ int depthAvgHT(HTptr hybridTrie) {
 
 
 int nbPrefixHT(HTptr hybridTrie, char* word) {
+
   if (hybridTrie == NULL)
     return 0;
 

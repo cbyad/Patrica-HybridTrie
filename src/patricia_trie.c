@@ -8,7 +8,6 @@
  * PRIMITIVES
  ****************/
 
-
 patriciaTrie newPatricia(char* word){
     
     patriciaTrie pt =(patriciaTrie)malloc(sizeof(struct patricia_node));
@@ -22,7 +21,6 @@ patriciaTrie newPatricia(char* word){
     return pt ;
 }
 
-
 patriciaTrie newPatricia_aux( patriciaTrie child , patriciaTrie next , char* word){
     
     patriciaTrie pt =(patriciaTrie)malloc(sizeof(struct patricia_node));
@@ -35,7 +33,6 @@ patriciaTrie newPatricia_aux( patriciaTrie child , patriciaTrie next , char* wor
     
     return pt ;
 }
-
 
 bool isTerminal (patriciaTrie pt){
     return strlen(pt->val)==0 ;
@@ -55,8 +52,6 @@ void freePatricia(patriciaTrie pt){
 bool isEmptyPatricia(patriciaTrie pt){
     return (pt==NULL)  ;
 }
-
-
 
 
 patriciaTrie insertPatricia(patriciaTrie pt ,char* word)  {
@@ -161,15 +156,13 @@ int countWordPatricia(patriciaTrie pt) {
 }
 
 
-
 int nbPrefixPatricia(patriciaTrie pt ,char* word){
     
-    if(*word==0) return countWordPatricia(pt);
     if(isEmptyPatricia(pt)) return 0;
-    
+    if(*word==0) return countWordPatricia(pt);
+
     int k = getPrefix(pt->val,word);
     if(k==0) return nbPrefixPatricia(pt->next,word);
-    
     if(strcmp(word,pt->val)==0) return countWordPatricia(pt->child);
     
     return nbPrefixPatricia(pt->child, word+k);
@@ -194,14 +187,32 @@ void averageInside(patriciaTrie pt, int * deph, int * total, int Cdepth){
     if(!isEmptyPatricia(pt->next)) averageInside(pt->next, deph, total, Cdepth);
 }
 
-patriciaTrie mergePatricia(patriciaTrie pt1 ,patriciaTrie pt2){
-    if(isEmptyPatricia(pt1)) return pt2 ;
-    if(isEmptyPatricia(pt2)) return pt1;
+
+patriciaTrie deletePatricia(patriciaTrie pt ,char* mot ){
+    if(isEmptyPatricia(pt)) return pt ;
+    if(!searchPatricia(pt, mot)) return pt ;
     
-    return NULL ;
-    
-    /////
+    return NULL ;// not completed
 }
 
 
+
+/*********************
+ * COMPLEX FUNCTIONS *
+ ********************/
+
+
+patriciaTrie mergePatricia(patriciaTrie pt1 ,patriciaTrie pt2){
+    //printf("1= %s  , 2= %s  \n",pt1->val,pt2->val);
+    if(isEmptyPatricia(pt1)) return pt2;
+    if(isEmptyPatricia(pt2)) return pt1; 
+    
+    int k =getPrefix(pt1->val, pt2->val);
+    if(k==0) return newPatricia_aux(pt2->child, mergePatricia(pt1, pt2->next), pt2->val);
+    
+    if(strlen(pt1->val)!=strlen(pt2->val)) return newPatricia_aux(pt1->child, mergePatricia(pt1->next, pt2), pt1->val);
+    else
+        return newPatricia_aux(mergePatricia(pt1->child, pt2->child), mergePatricia(pt1->next, pt2->next), pt1->val); // pt1->val==pt2->val
+
+}
 

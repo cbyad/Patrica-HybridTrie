@@ -2,8 +2,6 @@
 *Trie hybride: Conversion vers patricia
 
 /*----------------------- trie patricia  -------------------*/
-
 *Fonction qui liste les mots du dictionnaire dans l'ordre alphabetique
 *Fonction qui supprime un mot de la structure
-*Fonction qui fusionne deux patricia-tries
 *Fonction qui transforme un trie patricia en trie hybride

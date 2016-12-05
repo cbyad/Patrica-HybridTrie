@@ -40,7 +40,7 @@ void parcoursHT(HTptr pt) {
   parcoursHT(pt->eq);
   parcoursHT(pt->sup);
 }
-/*
+
 int main(){
 
   // char * directory ="/Users/cb_mac/Desktop/UPMC/SEMESTRE1/ALGAV/dev/Shakespeare" ;
@@ -65,15 +65,15 @@ int main(){
     HTptr hybrid = NULL;
     patriciaTrie pt =NULL;
     int choix ;
-    char* continuer="oui";
+    bool continuer=true;
     
     printf("-------------------------------[DEVOIR DE PROGRAMMATION TRIE HYBRIDE & PATRICIA]---------------------------------\n");
 
     
-    while (strcmp(continuer,"oui")==0)
+    while (continuer)
     {
         
-        printf("1. Chargements des Tries & info \n2.Recherche \n3. Insertion \n4.Nbre prefix \n5. Suppression..\n" );
+        printf("1. Chargements des Tries & info \n2. Recherche \n3. Insertion\n4. Nombre prefix\n5. Suppression\n0. Quitter\n" );
         printf("Saisir une opération ---> \t");
         if (scanf("%d",&choix) == EOF) {
           perror("scanf");
@@ -82,6 +82,9 @@ int main(){
         printf("-----------------------------------\n");
         switch(choix)
         {
+            case 0:
+                continuer = false;
+                break;
             case 1:
             {
                 pt = buildShakespearePT(directory);
@@ -106,17 +109,17 @@ int main(){
                 break;
             case 2:
             {
-                printf("saisir le mot a rechercher  ----> \t");
+                printf("saisir le mot à rechercher  ----> \t");
                 getchar();
                 char* mot =saisirChaine();
-                printf("result search ---> hybrid: %d\n", searchHT(hybrid, mot));
-                printf("result search ---> patricia: %d\n", searchPatricia(pt, mot));
+                printf("Résultat recherche ---> hybrid: %d\n", searchHT(hybrid, mot));
+                printf("Résultat recherche ---> patricia: %d\n", searchPatricia(pt, mot));
                 
             }
                 break;
             case 3:
             {
-                printf("saisir le mot a inserer  ----> \t");
+                printf("Saisir le mot à insérer  ----> \t");
                 getchar();
                 char* mot =saisirChaine();
                 pt=insertPatricia(pt, mot);
@@ -142,13 +145,10 @@ int main(){
                 
                 break;
             default:
-                printf("Commande entree incorrecte" );
+                printf("Commande incorrecte" );
                 break;
                 
         }
-        printf("Voulez vous effectuer une autre action sur les structures ? oui||non \n") ;
-        getchar();
-        continuer=saisirChaine();
     }
     
     // -------------------LIBERATION TOTALE DE LA MEMOIRE UTILISEE DANS LES STRUCTURES---------------------
@@ -158,9 +158,8 @@ int main(){
 
     return 0 ;
 }
- */
 
-
+/*
 int main(){
     
 
@@ -203,5 +202,5 @@ int main(){
     return  0;
     
 }
- 
+*/
  

@@ -71,7 +71,7 @@ int heightPatricia(patriciaTrie pt);
  *******************/
 
 //Merge 2 Patricia tries
-patriciaTrie mergePatricia(patriciaTrie pt1 ,patriciaTrie pt2);             //ok mais a revoir 
+patriciaTrie mergePatricia(patriciaTrie pt1 ,patriciaTrie pt2);
 
 
 //patricia trie to hybrid

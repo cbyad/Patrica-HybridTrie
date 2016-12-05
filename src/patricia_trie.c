@@ -1,4 +1,3 @@
-
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
@@ -53,7 +52,6 @@ bool isEmptyPatricia(patriciaTrie pt){
     return (pt==NULL)  ;
 }
 
-
 patriciaTrie insertPatricia(patriciaTrie pt ,char* word)  {
     
     if(isEmptyPatricia(pt)) return newPatricia_aux(newPatricia("\0"), NULL, word);
@@ -67,7 +65,13 @@ patriciaTrie insertPatricia(patriciaTrie pt ,char* word)  {
     int sizeWord = (int)strlen(word);
     int sizeRoot =(int)strlen(pt->val);
     
-    if(k==0) pt->next=insertPatricia(pt->next,word);
+    if(k==0){
+        if(*pt->val <*word)  pt->next=insertPatricia(pt->next,word);
+        else{
+            patriciaTrie t  =newPatricia_aux(newPatricia(""), pt, word);
+            pt=t ;
+        }
+    }
     
     else if (sizeWord>sizeRoot) {                                                                       //                 ap | --> apple
         
@@ -107,7 +111,6 @@ patriciaTrie insertPatricia(patriciaTrie pt ,char* word)  {
     return pt ;
 }
 
-
 void split(patriciaTrie pt, int k)
 {
     patriciaTrie p = newPatricia(pt->val+k);
@@ -137,14 +140,13 @@ bool searchPatricia(patriciaTrie pt ,char* word){
     return false ;
 }
 
-
 int countNilPatricia(patriciaTrie pt){
     return (pt==NULL)?1:countNilPatricia(pt->child)+countNilPatricia(pt->next);
 }
 
-
 // size is caracterized by size of the longest children
 int heightPatricia(patriciaTrie pt){
+    
     return isEmptyPatricia(pt)?-1 : max3(1+heightPatricia(pt->child), heightPatricia(pt->next), -1);
 }
 
@@ -199,18 +201,21 @@ patriciaTrie deletePatricia(patriciaTrie pt ,char* mot ){
  * COMPLEX FUNCTIONS *
  ********************/
 
-
-patriciaTrie mergePatricia(patriciaTrie pt1 ,patriciaTrie pt2){
-    //printf("1= %s  , 2= %s  \n",pt1->val,pt2->val);
+patriciaTrie mergePatricia(patriciaTrie pt1 ,patriciaTrie pt2){ // apple   apple
+    
     if(isEmptyPatricia(pt1)) return pt2;
     if(isEmptyPatricia(pt2)) return pt1; 
     
     int k =getPrefix(pt1->val, pt2->val);
+  
     if(k==0) return newPatricia_aux(pt2->child, mergePatricia(pt1, pt2->next), pt2->val);
+   
+    if(k==strlen(pt1->val) && strlen(pt1->val)==strlen(pt2->val)&& isTerminal(pt1->child))
+        return  newPatricia_aux(mergePatricia(pt1->child, pt2->child->next), pt1->next, pt1->val);
     
-    if(strlen(pt1->val)!=strlen(pt2->val)) return newPatricia_aux(pt1->child, mergePatricia(pt1->next, pt2), pt1->val);
-    else
-        return newPatricia_aux(mergePatricia(pt1->child, pt2->child), mergePatricia(pt1->next, pt2->next), pt1->val); // pt1->val==pt2->val
+    if(k==strlen(pt1->val) && strlen(pt1->val)==strlen(pt2->val))
+        return  newPatricia_aux(mergePatricia(pt1->child, pt2->child), pt1->next, pt1->val);
+    
+    return newPatricia_aux(pt1->child, mergePatricia(pt1->next, pt2), pt1->val);
 
 }
-

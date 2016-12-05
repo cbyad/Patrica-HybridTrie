@@ -40,7 +40,7 @@ void parcoursHT(HTptr pt) {
   parcoursHT(pt->eq);
   parcoursHT(pt->sup);
 }
-
+/*
 int main(){
 
   // char * directory ="/Users/cb_mac/Desktop/UPMC/SEMESTRE1/ALGAV/dev/Shakespeare" ;
@@ -158,6 +158,7 @@ int main(){
 
     return 0 ;
 }
+*/
 
 /*
 int main(){
@@ -203,4 +204,82 @@ int main(){
     
 }
 */
+
+
+
+int main(){
+    
+    
+    
+    
+    
+    char* path = "/Users/cb_mac/Desktop/UPMC/SEMESTRE1/ALGAV/dev/dev_algav/dev_algav_trie/dev_algav_trie/algav/example/basic";
+    
+    wlist basic = read_dict(path);
+    
+    patriciaTrie pt1 = NULL ;
+    pt1=insertListPT(pt1, basic);
+    patriciaTrie pt2 = NULL ;
+   pt2=insertListPT(pt2, basic);
+  pt2=insertPatricia(pt2, "dactylographies");
+    pt2=insertPatricia(pt2, "genre");
+     pt2=insertPatricia(pt2, "dactylo");
+  //  pt2=insertPatricia(pt2, "a");
+    
+    
+    
+    
+    
+    patriciaTrie k=NULL ;
+    if(!isEmptyPatricia(pt1)) {
+        printf("-------patricia--------\n");
+        printf("NbWords : %d \n",countWordPatricia(pt1));
+        printf("nbNULL: %d\n", countNilPatricia(pt1));
+        printf("heightHT: %d\n", heightPatricia(pt1));
+        printf("AverageDeph: %d \n",averageDepthPatricia(pt1));
+        printf("Search: %d \n",searchPatricia(pt1,""));
+        printf("result nombre de mot prefix  ---> patricia: %d\n", nbPrefixPatricia(pt1, "dactylo"));
+        
+        
+        
+    }
+    
+    if(!isEmptyPatricia(pt2)) {
+        printf("-------patricia--------\n");
+        printf("NbWords : %d \n",countWordPatricia(pt2));
+        printf("nbNULL: %d\n", countNilPatricia(pt2));
+        printf("heightHT: %d\n", heightPatricia(pt2));
+        printf("AverageDeph: %d \n",averageDepthPatricia(pt2));
+        printf("Search: %d \n",searchPatricia(pt2,"ZOK"));
+        printf("result nombre de mot prefix  ---> patricia: %d\n", nbPrefixPatricia(pt2, "dactylo"));
+        
+    }
+    
+    k=mergePatricia(pt1, pt2);
+    if(!isEmptyPatricia(k)) {
+        printf("-------patricia fusion--------\n");
+        printf("NbWords : %d \n",countWordPatricia(k));
+        printf("nbNULL: %d\n", countNilPatricia(k));
+        printf("heightHT: %d\n", heightPatricia(k));
+        printf("AverageDeph: %d \n",averageDepthPatricia(k));
+        printf("Search: %d \n",searchPatricia(k,"ballon"));
+          printf("Search: %d \n",searchPatricia(k,"dactylographies"));
+         
+        
+        printf("result nombre de mot prefix  ---> patricia: %d\n", nbPrefixPatricia(k, "dactylo"));
+        parcours(k);
+        
+    }
+    
+    
+    freePatricia(pt1);
+    freePatricia(pt2);
+   // freePatricia(k);
+    
+    
+    
+    return  0;
+    
+}
+
  

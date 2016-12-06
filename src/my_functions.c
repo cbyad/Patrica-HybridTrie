@@ -53,10 +53,6 @@ char* getPrefixString(char* stringA ,char* stringB){
     
 }
 
- void devAlgavAllTest(){
-    //
- }
-
 char* saisirChaine()
 {
     char * str = NULL;

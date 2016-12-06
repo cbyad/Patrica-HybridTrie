@@ -1,6 +1,4 @@
 #include "../include/build_dict.h"
-
-
 #define SIZE_MAX_STRING 500
 #define BUFF_SIZE 500
 
@@ -109,10 +107,7 @@ patriciaTrie buildShakespearePT(char* directory){
     }
     
     return pt ;
-    
 }
-
-
 
 HTptr buildShakespeareHT( char* directory){
     float final_time ;
@@ -177,4 +172,3 @@ HTptr buildShakespeareHT( char* directory){
     return hybrid ;
 
 }
-

@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
-
 #include "../include/hybrid_trie.h"
 #include "../include/word_list.h"
 

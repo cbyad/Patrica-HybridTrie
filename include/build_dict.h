@@ -1,17 +1,11 @@
 #ifndef _BUILD_DICT_
 #define _BUILD_DICT_
-
+#define _XOPEN_SOUCE 700
 #include <stdio.h>
 #include <errno.h>
-
 #include "../include/hybrid_trie.h"
 #include "../include/patricia_trie.h"
 #include "../include/word_list.h"
-
-
-
-//new ----added for import all files from Shakespeare
-#define _XOPEN_SOUCE 700
 
 #include <time.h>
 #include <string.h>
@@ -20,7 +14,6 @@
 #include <unistd.h>
 #include <dirent.h>
 #include <fcntl.h>
-
 
 
 #define BUF_SIZE 100
@@ -53,8 +46,5 @@ patriciaTrie insertListPT(patriciaTrie pt , wlist list);
 
 /*insert all files from Shakespeare to patricia */
 patriciaTrie buildShakespearePT(char* directory);
-
-
-
 
 #endif

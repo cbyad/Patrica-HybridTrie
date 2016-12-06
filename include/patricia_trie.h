@@ -5,13 +5,11 @@
 #include "word_list.h"
 #include "../include/hybrid_trie.h"
 
-
 typedef struct patricia_node {
     char* val;
     struct patricia_node* next ;
     struct patricia_node* child;
 } *patriciaTrie;
-
 
 
 /****************
@@ -74,16 +72,10 @@ int heightPatricia(patriciaTrie pt);
 //Merge 2 Patricia tries
 patriciaTrie mergePatricia(patriciaTrie pt1 ,patriciaTrie pt2);
 
-
 //patricia trie to hybrid
 HTptr patriciaToHybrid(patriciaTrie pt);
 
 /* hybrid to patricia */
 patriciaTrie hybrid2patricia(HTptr hybridTrie);
 
-
 #endif
-
-
-
-

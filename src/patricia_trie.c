@@ -146,7 +146,6 @@ int countNilPatricia(patriciaTrie pt){
 
 // size is caracterized by size of the longest children
 int heightPatricia(patriciaTrie pt){
-    
     return isEmptyPatricia(pt)?-1 : max3(1+heightPatricia(pt->child), heightPatricia(pt->next), -1);
 }
 
@@ -175,7 +174,6 @@ int averageDepthPatricia(patriciaTrie pt){
     averageInside(pt, &deph, &total, Cdepth);
     if(total == 0) return 0.0;
     return deph / total;
-    
 }
 
 void averageInside(patriciaTrie pt, int * deph, int * total, int Cdepth){
@@ -193,8 +191,6 @@ patriciaTrie deletePatricia(patriciaTrie pt ,char* mot ){
     if(!searchPatricia(pt, mot)) return pt ;
     
     return NULL ;// not completed
-    
-    
     
 }
 
@@ -225,7 +221,6 @@ wlist listWords(patriciaTrie pt){
     return myList ;
 }
 
-
 /*********************
  * COMPLEX FUNCTIONS *
  ********************/
@@ -237,7 +232,10 @@ patriciaTrie mergePatricia(patriciaTrie pt1 ,patriciaTrie pt2){
     
     int k =getPrefix(pt1->val, pt2->val);
   
-    if(k==0) return newPatricia_aux(pt2->child, mergePatricia(pt1, pt2->next), pt2->val);
+    if(k==0) {
+        if(*pt1->val > *pt2->val) return newPatricia_aux(pt2->child, mergePatricia(pt1, pt2->next), pt2->val);
+        return  newPatricia_aux(pt1->child, mergePatricia(pt1->next, pt2), pt1->val);
+    }
    
     if(k==strlen(pt1->val) && strlen(pt1->val)==strlen(pt2->val)&& isTerminal(pt1->child))
         return  newPatricia_aux(mergePatricia(pt1->child, pt2->child->next), pt1->next, pt1->val);

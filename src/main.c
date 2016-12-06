@@ -31,20 +31,14 @@ void displayHybrid_aux(HTptr hybrid,FILE* p){
             
             else
             {
-                
                 fprintf(p, "%c_%d -> %c_%d \n",hybrid->key,i,hybrid->inf->key,i-1);
-
             }
-                
                 i++;
                 if(hybrid->eq==NULL){fprintf(p, "%c_%d -> NULL_%d  \n",hybrid->key,i-2,i-2);}
-            
                 else{
                
                     fprintf(p, "%c_%d -> %c_%d \n",hybrid->key,i-2,hybrid->eq->key,i);
-                
                 }
-            
                     i++;
                     if(hybrid->sup==NULL){fprintf(p, "%c_%d -> NULL_%d  \n",hybrid->key,i-3,i-3);}
             
@@ -53,18 +47,12 @@ void displayHybrid_aux(HTptr hybrid,FILE* p){
                         fprintf(p, "%c_%d -> %c_%d \n",hybrid->key,i-3,hybrid->sup->key,i);
 
                     }
-                
                     displayHybrid_aux(hybrid->inf,p);
                     displayHybrid_aux(hybrid->eq, p);
                     displayHybrid_aux(hybrid->sup, p);
         }
-     
     }
-    
-    
-    
 }
-
 
 void dispHT(HTptr pt) {
   if (pt == NULL)
@@ -110,7 +98,6 @@ int main(int argc , char* argv[]){
     
     printf("-------------------------------[DEVOIR DE PROGRAMMATION TRIE HYBRIDE & PATRICIA]---------------------------------\n");
 
-    
     while (continuer)
     {
 
@@ -155,7 +142,6 @@ int main(int argc , char* argv[]){
                 break;
             case 2:
             {
-                
                 clock_t beg1 , end1 ;
                 clock_t beg2, end2 ;
 
@@ -166,7 +152,6 @@ int main(int argc , char* argv[]){
                 beg1=clock();
                 printf("Résultat recherche ---> hybrid: %d\n", searchHT(hybrid, mot));
                 end1=clock();
-                
                 printf("time used for searching in Hybrid --> %f seconds\n",(float)(end1-beg1)/CLOCKS_PER_SEC);
                 
                 beg2=clock();
@@ -322,14 +307,12 @@ int main(int argc , char* argv[]){
             default:
                 printf("Commande incorrecte" );
                 break;
- 
         }
     }
     
-    // -------------------LIBERATION TOTALE DE LA MEMOIRE UTILISEE DANS LES STRUCTURES---------------------
+    // -------------------LIBERATION TOTALE DE LA MEMOIRE UTILISEE DANS LES STRUCTURES--------------------
     freeHT(hybrid);
     freePatricia(pt);
     // ---------------------------------------------------------------------------------------------------
-
     return 0 ;
 }

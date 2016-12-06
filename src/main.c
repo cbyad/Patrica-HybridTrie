@@ -16,6 +16,56 @@ void parcours(patriciaTrie pt){
     
 }
 
+void displayHybrid_aux(HTptr hybrid,FILE* p){
+    static int i= 0;
+    if (p != NULL) {
+       
+        if (hybrid==NULL) {
+            
+            return ;
+        }
+        
+        else{
+            ++i;
+            if(hybrid->inf==NULL){  fprintf(p, "%c_%d -> NULL_%d  \n",hybrid->key,i-1,i-1);  }
+            
+            else
+            {
+                
+                fprintf(p, "%c_%d -> %c_%d \n",hybrid->key,i,hybrid->inf->key,i-1);
+
+            }
+                
+                i++;
+                if(hybrid->eq==NULL){fprintf(p, "%c_%d -> NULL_%d  \n",hybrid->key,i-2,i-2);}
+            
+                else{
+               
+                    fprintf(p, "%c_%d -> %c_%d \n",hybrid->key,i-2,hybrid->eq->key,i);
+                
+                }
+            
+                    i++;
+                    if(hybrid->sup==NULL){fprintf(p, "%c_%d -> NULL_%d  \n",hybrid->key,i-3,i-3);}
+            
+                    else{
+                    
+                        fprintf(p, "%c_%d -> %c_%d \n",hybrid->key,i-3,hybrid->sup->key,i);
+
+                    }
+                
+                    displayHybrid_aux(hybrid->inf,p);
+                    displayHybrid_aux(hybrid->eq, p);
+                    displayHybrid_aux(hybrid->sup, p);
+        }
+     
+    }
+    
+    
+    
+}
+
+
 void dispHT(HTptr pt) {
   if (pt == NULL)
     printf("NULL");
@@ -64,7 +114,7 @@ int main(int argc , char* argv[]){
     while (continuer)
     {
 
-        printf("1.Chargements des Tries & info \n2.Recherche \n3. Insertion\n4.Nombre prefix \n5.Suppression \n6.Ordre alphabetique \n7.Fusion de patricia       \n0.Quitter\n" );
+        printf("1.Chargements des Tries & info \n2.Recherche \n3. Insertion\n4.Nombre prefix \n5.Suppression \n6.Ordre alphabetique \n7.Fusion de patricia   \n8.Afficher    \n0.Quitter\n" );
         printf("Saisir une opération ---> \t");
         if (scanf("%d",&choix) == EOF) {
           perror("scanf");
@@ -98,7 +148,7 @@ int main(int argc , char* argv[]){
                     printf("-------patricia--------\n");
                     printf("NbWords : %d \n",countWordPatricia(pt));
                     printf("nbNULL: %d\n", countNilPatricia(pt));
-                    printf("heightHT: %d\n", heightPatricia(pt));
+                    printf("heightPT: %d\n", heightPatricia(pt));
                     printf("AverageDeph: %d \n",averageDepthPatricia(pt));
                 }
             }
@@ -163,6 +213,23 @@ int main(int argc , char* argv[]){
                 fusion=mergePatricia(pt,pt);
             }
             break;
+                
+            case 8:
+            {
+                printf("-------------Affichage ------------\n");
+                //printf("-------patricia----\n");
+                char* path ="/Users/cb_mac/Desktop/UPMC/SEMESTRE1/ALGAV/dev/dev_algav/dev_algav_trie/dev_algav_trie/algav/hybrid.dot";
+                
+                FILE* file =fopen(path,"w");
+                fprintf(file,"digraph d { \n") ;
+                displayHybrid_aux(hybrid, file);
+                //fseek(file, 0, SEEK_END);
+                fprintf(file,"} \n") ;
+                
+                
+            }
+                break;
+
             default:
                 printf("Commande incorrecte" );
                 break;

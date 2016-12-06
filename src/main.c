@@ -6,7 +6,6 @@
 #include "../include/build_dict.h"
 #include "../include/word_list.h"
 
-
 void parcours(patriciaTrie pt){
     
     if (!isEmptyPatricia(pt)) {
@@ -40,27 +39,18 @@ void parcoursHT(HTptr pt) {
   parcoursHT(pt->eq);
   parcoursHT(pt->sup);
 }
-/*
-int main(){
 
-  // char * directory ="/Users/cb_mac/Desktop/UPMC/SEMESTRE1/ALGAV/dev/Shakespeare" ;
-  char * directory ="Shakespeare";
+int main(int argc , char* argv[]){
 
+    char * directory ="/Users/cb_mac/Desktop/UPMC/SEMESTRE1/ALGAV/dev/Shakespeare" ;
+    char* basic = "/Users/cb_mac/Desktop/UPMC/SEMESTRE1/ALGAV/dev/dev_algav/dev_algav_trie/dev_algav_trie/algav/example";
+    
+    char** repertoireChargement=(char**)malloc(2*sizeof(char*));
+    repertoireChargement[0]=basic;
+    repertoireChargement[1]=directory;
+    
+  //char * directory ="Shakespeare";
   // char* path = "example/test";
-
-  // wlist basic = read_dict(path);
-  // HTptr hybrid = NULL;
-  // hybrid = insertListHT(hybrid, basic);
-  // parcoursHT(hybrid);
-
-  // if(!isEmptyHT(hybrid)) {
-  //   printf("-------Hybrid--------\n");
-  //   printf("NbWords : %d \n",countwHT(hybrid));
-  //   printf("nbNULL: %d\n", nbNULLHT(hybrid));
-  //   printf("heightHT: %d\n", heightHT(hybrid));
-  //   printf("AverageDeph: %d \n",depthAvgHT(hybrid));
-  //   printf("Prefix: %d\n", nbPrefixHT(hybrid, "tes"));
-  // }
 
     HTptr hybrid = NULL;
     patriciaTrie pt =NULL;
@@ -73,9 +63,8 @@ int main(){
     
     while (continuer)
     {
-        
-        printf("1. Chargements des Tries & info \n2. Recherche \n3. Insertion\n4. Nombre prefix \n5. Suppression \n6.Ordre alphabetique 
-        \n7.Fusion de patricia           \n0. Quitter\n" );
+
+        printf("1.Chargements des Tries & info \n2.Recherche \n3. Insertion\n4.Nombre prefix \n5.Suppression \n6.Ordre alphabetique \n7.Fusion de patricia       \n0.Quitter\n" );
         printf("Saisir une opération ---> \t");
         if (scanf("%d",&choix) == EOF) {
           perror("scanf");
@@ -90,8 +79,12 @@ int main(){
             case 1:
             {
                 printf("-------------Construction des tries ------------\n");
-                pt = buildShakespearePT(directory);
-                hybrid=buildShakespeareHT(directory);
+                printf("Repertoire a charger --------> 1.basic   2.Shakespeare  \t ");
+                int ChoixRepertoire ;
+                scanf("%d",&ChoixRepertoire);
+                
+                pt = buildShakespearePT(repertoireChargement[ChoixRepertoire-1]);
+                hybrid=buildShakespeareHT(repertoireChargement[ChoixRepertoire-1]);
                 if(!isEmptyHT(hybrid)) {
                 
                     printf("-------Hybrid--------\n");
@@ -118,7 +111,6 @@ int main(){
                 char* mot =saisirChaine();
                 printf("Résultat recherche ---> hybrid: %d\n", searchHT(hybrid, mot));
                 printf("Résultat recherche ---> patricia: %d\n", searchPatricia(pt, mot));
-                
             }
                 break;
             case 3:
@@ -150,7 +142,7 @@ int main(){
                 printf("saisir le mot à supprimer  ----> \t");
                 getchar();
                 char* mot =saisirChaine();
-                hybrid=removeHT(hybrid);
+                hybrid=removeHT(hybrid,mot);
             }
                 break;
             case 6:
@@ -159,17 +151,16 @@ int main(){
                 printf("-------hybride----\n");
                 printList(wordListHT(hybrid));
  
-                printf("-------patricia----\n");
+                printf("-------patricia---- \n");
                 printList(listWords(pt));
             }
                 break;
             
-                case 6:
+                case 7:
             {
                 printf("-------------Fusion patricia ------------\n");
                 printf("-------patricia----\n");
-                fusion=mergePstricia(pt,pt);
-                
+                fusion=mergePatricia(pt,pt);
             }
             break;
             default:
@@ -185,122 +176,4 @@ int main(){
     // ---------------------------------------------------------------------------------------------------
 
     return 0 ;
-}
-*/
-
-/*
-int main(){
-    
-
-    char* path = "/Users/cb_mac/Desktop/UPMC/SEMESTRE1/ALGAV/dev/dev_algav/dev_algav_trie/dev_algav_trie/algav/example/basic";
-    
-    wlist basic = read_dict(path);
-    HTptr hybrid = NULL;
-    hybrid = insertListHT(hybrid, basic);
-    patriciaTrie pt = NULL ;
-    pt=insertListPT(pt, basic);
-    
-    if(!isEmptyHT(hybrid)) {
-        
-        parcoursHT(hybrid);
-        printf("-------Hybrid--------\n");
-        printf("NbWords : %d \n",countwHT(hybrid));
-        printf("nbNULL: %d\n", nbNULLHT(hybrid));
-        printf("heightHT: %d\n", heightHT(hybrid));
-        printf("AverageDeph: %d \n",depthAvgHT(hybrid));
-        printf("result nombre de mot prefix ---> hybrid: %d\n", nbPrefixHT(hybrid, "ballo"));
-        
-    }
-    
-    if(!isEmptyPatricia(pt)) {
-        printf("-------patricia--------\n");
-        printf("NbWords : %d \n",countWordPatricia(pt));
-        printf("nbNULL: %d\n", countNilPatricia(pt));
-        printf("heightHT: %d\n", heightPatricia(pt));
-        printf("AverageDeph: %d \n",averageDepthPatricia(pt));
-        printf("result nombre de mot prefix  ---> patricia: %d\n", prefixPatricia(pt, "ballon"));
-
-    }
-    
-    
-    freePatricia(pt);
-    freeHT(hybrid);
-    
-    
-
-    return  0;
-    
-}
-*/
-
-int main(){
-    
-    char* path = "/Users/cb_mac/Desktop/UPMC/SEMESTRE1/ALGAV/dev/dev_algav/dev_algav_trie/dev_algav_trie/algav/example/basic";
-    
-    wlist basic = read_dict(path);
-    
-    patriciaTrie pt1 = NULL ;
-    pt1=insertListPT(pt1, basic);
-    patriciaTrie pt2 = NULL ;
-    
-    
-  // pt2=insertListPT(pt2, basic);
-  //pt2=insertPatricia(pt2, "dactylographies");
- //   pt2=insertPatricia(pt2, "genre");
- //    pt2=insertPatricia(pt2, "dactylo");
-  //  pt2=insertPatricia(pt2, "a");
-    
-    
-    
-    patriciaTrie k=NULL ;
-    if(!isEmptyPatricia(pt1)) {
-        printf("-------patricia--------\n");
-        printf("NbWords : %d \n",countWordPatricia(pt1));
-        printf("nbNULL: %d\n", countNilPatricia(pt1));
-        printf("heightHT: %d\n", heightPatricia(pt1));
-        printf("AverageDeph: %d \n",averageDepthPatricia(pt1));
-        printf("Search: %d \n",searchPatricia(pt1,""));
-        printf("result nombre de mot prefix  ---> patricia: %d\n", nbPrefixPatricia(pt1, "dactylo"));
-        printList(listWords(pt1));
-        
-        
-        
-    }
-    
-    if(!isEmptyPatricia(pt2)) {
-        printf("-------patricia--------\n");
-        printf("NbWords : %d \n",countWordPatricia(pt2));
-        printf("nbNULL: %d\n", countNilPatricia(pt2));
-        printf("heightHT: %d\n", heightPatricia(pt2));
-        printf("AverageDeph: %d \n",averageDepthPatricia(pt2));
-        printf("Search: %d \n",searchPatricia(pt2,"ZOK"));
-        printf("result nombre de mot prefix  ---> patricia: %d\n", nbPrefixPatricia(pt2, "dactylo"));
-        
-    }
-    
-    k=mergePatricia(pt1, pt2);
-    if(!isEmptyPatricia(k)) {
-        printf("-------patricia fusion--------\n");
-        printf("NbWords : %d \n",countWordPatricia(k));
-        printf("nbNULL: %d\n", countNilPatricia(k));
-        printf("heightHT: %d\n", heightPatricia(k));
-        printf("AverageDeph: %d \n",averageDepthPatricia(k));
-        printf("Search: %d \n",searchPatricia(k,"ballon"));
-          printf("Search: %d \n",searchPatricia(k,"dactylographies"));
-         
-        
-        printf("result nombre de mot prefix  ---> patricia: %d\n", nbPrefixPatricia(k, "dactylo"));
-        //parcours(k);
-        
-    }
-    
-    
-    freePatricia(pt1);
-    freePatricia(pt2);
-   // freePatricia(k);
-    
-    
-    
-    return  0;
-    
 }

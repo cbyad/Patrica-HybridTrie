@@ -1,8 +1,8 @@
 #include "../include/build_dict.h"
 
 
-#define SIZE_MAX_STRING 100
-#define BUFF_SIZE 100
+#define SIZE_MAX_STRING 500
+#define BUFF_SIZE 500
 
 
 wlist read_dict(char* path) {

@@ -48,6 +48,7 @@ int countWordPatricia(patriciaTrie pt);
 
 // Return a word list from patricia trie
 wlist listWords(patriciaTrie pt);
+void listWords_aux(patriciaTrie pt , wlist myList,char* word);
 
 // Count NULL pointers in patricia trie
 int countNilPatricia(patriciaTrie pt);

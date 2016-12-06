@@ -64,6 +64,7 @@ int main(){
 
     HTptr hybrid = NULL;
     patriciaTrie pt =NULL;
+    patriciaTrie fusion =NULL ;
     int choix ;
     bool continuer=true;
     
@@ -73,7 +74,8 @@ int main(){
     while (continuer)
     {
         
-        printf("1. Chargements des Tries & info \n2. Recherche \n3. Insertion\n4. Nombre prefix\n5. Suppression\n0. Quitter\n" );
+        printf("1. Chargements des Tries & info \n2. Recherche \n3. Insertion\n4. Nombre prefix \n5. Suppression \n6.Ordre alphabetique 
+        \n7.Fusion de patricia           \n0. Quitter\n" );
         printf("Saisir une opération ---> \t");
         if (scanf("%d",&choix) == EOF) {
           perror("scanf");
@@ -87,6 +89,7 @@ int main(){
                 break;
             case 1:
             {
+                printf("-------------Construction des tries ------------\n");
                 pt = buildShakespearePT(directory);
                 hybrid=buildShakespeareHT(directory);
                 if(!isEmptyHT(hybrid)) {
@@ -109,6 +112,7 @@ int main(){
                 break;
             case 2:
             {
+                printf("-------------Recherche ------------\n");
                 printf("saisir le mot à rechercher  ----> \t");
                 getchar();
                 char* mot =saisirChaine();
@@ -119,6 +123,7 @@ int main(){
                 break;
             case 3:
             {
+                printf("-------------Insertion ------------\n");
                 printf("Saisir le mot à insérer  ----> \t");
                 getchar();
                 char* mot =saisirChaine();
@@ -129,25 +134,48 @@ int main(){
                 break;
             case 4 :
             {
+                printf("-------------Prefix ------------\n");
                 printf("saisir le mot  ----> \t");
                 getchar();
                 char* mot =saisirChaine();
                 
                 printf("result nombre de mot prefix ---> hybrid: %d\n", nbPrefixHT(hybrid, mot));
-                // printf("result nombre de mot prefix  ---> patricia: %d\n", prefixPatricia(pt, mot));
+                printf("result nombre de mot prefix  ---> patricia: %d\n", nbPrefixPatricia(pt, mot));
             
             }
                 break;
             case 5:
-                
+            {
+                printf("-------------Suppression ------------\n");
+                printf("saisir le mot à supprimer  ----> \t");
+                getchar();
+                char* mot =saisirChaine();
+                hybrid=removeHT(hybrid);
+            }
                 break;
             case 6:
-                
+            {
+                printf("-------------affichage dans l'ordre Alphabetique ------------\n");
+                printf("-------hybride----\n");
+                printList(wordListHT(hybrid));
+ 
+                printf("-------patricia----\n");
+                printList(listWords(pt));
+            }
                 break;
+            
+                case 6:
+            {
+                printf("-------------Fusion patricia ------------\n");
+                printf("-------patricia----\n");
+                fusion=mergePstricia(pt,pt);
+                
+            }
+            break;
             default:
                 printf("Commande incorrecte" );
                 break;
-                
+ 
         }
     }
     
@@ -205,13 +233,7 @@ int main(){
 }
 */
 
-
-
 int main(){
-    
-    
-    
-    
     
     char* path = "/Users/cb_mac/Desktop/UPMC/SEMESTRE1/ALGAV/dev/dev_algav/dev_algav_trie/dev_algav_trie/algav/example/basic";
     
@@ -220,13 +242,13 @@ int main(){
     patriciaTrie pt1 = NULL ;
     pt1=insertListPT(pt1, basic);
     patriciaTrie pt2 = NULL ;
-   pt2=insertListPT(pt2, basic);
-  pt2=insertPatricia(pt2, "dactylographies");
-    pt2=insertPatricia(pt2, "genre");
-     pt2=insertPatricia(pt2, "dactylo");
+    
+    
+  // pt2=insertListPT(pt2, basic);
+  //pt2=insertPatricia(pt2, "dactylographies");
+ //   pt2=insertPatricia(pt2, "genre");
+ //    pt2=insertPatricia(pt2, "dactylo");
   //  pt2=insertPatricia(pt2, "a");
-    
-    
     
     
     
@@ -239,6 +261,7 @@ int main(){
         printf("AverageDeph: %d \n",averageDepthPatricia(pt1));
         printf("Search: %d \n",searchPatricia(pt1,""));
         printf("result nombre de mot prefix  ---> patricia: %d\n", nbPrefixPatricia(pt1, "dactylo"));
+        printList(listWords(pt1));
         
         
         
@@ -267,7 +290,7 @@ int main(){
          
         
         printf("result nombre de mot prefix  ---> patricia: %d\n", nbPrefixPatricia(k, "dactylo"));
-        parcours(k);
+        //parcours(k);
         
     }
     
@@ -281,5 +304,3 @@ int main(){
     return  0;
     
 }
-
- 

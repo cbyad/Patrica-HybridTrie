@@ -193,15 +193,44 @@ patriciaTrie deletePatricia(patriciaTrie pt ,char* mot ){
     if(!searchPatricia(pt, mot)) return pt ;
     
     return NULL ;// not completed
+    
+    
+    
 }
 
+void listWords_aux(patriciaTrie pt , wlist myList ,char* word){
+
+    if(isEmptyPatricia(pt)) return  ;
+    
+    int sizeWord =(int)strlen(word);
+    int iLoop ;
+    
+    char* newString= (char*) malloc(sizeof(char)*(3*sizeWord)); // we don't know how long will be the string lenght!!
+    for (iLoop=0; iLoop<sizeWord; iLoop++) {
+        newString[iLoop]=word[iLoop];
+    }
+    newString =strcat(newString, pt->val);  //add value of the current note
+    
+    if(isTerminal(pt)) addList(myList, newString);
+    
+    listWords_aux(pt->child, myList, newString);
+    listWords_aux(pt->next, myList, word);
+
+}
+
+wlist listWords(patriciaTrie pt){
+
+    wlist myList = newList() ;
+    listWords_aux(pt, myList,"");
+    return myList ;
+}
 
 
 /*********************
  * COMPLEX FUNCTIONS *
  ********************/
 
-patriciaTrie mergePatricia(patriciaTrie pt1 ,patriciaTrie pt2){ // apple   apple
+patriciaTrie mergePatricia(patriciaTrie pt1 ,patriciaTrie pt2){
     
     if(isEmptyPatricia(pt1)) return pt2;
     if(isEmptyPatricia(pt2)) return pt1; 

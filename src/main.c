@@ -114,7 +114,7 @@ int main(int argc , char* argv[]){
     while (continuer)
     {
 
-        printf("1.Chargements des Tries & info \n2.Recherche \n3. Insertion\n4.Nombre prefix \n5.Suppression \n6.Ordre alphabetique \n7.Fusion de patricia   \n8.Afficher    \n0.Quitter\n" );
+        printf("1.Chargements des Tries & info \n2.Recherche \n3. Insertion\n4.Nombre prefix \n5.Suppression \n6.Ordre alphabetique \n7.Fusion de patricia   \n8.profondeur moyenne \n9.Nb null \n0.Quitter\n" );
         printf("Saisir une opération ---> \t");
         if (scanf("%d",&choix) == EOF) {
           perror("scanf");
@@ -155,54 +155,98 @@ int main(int argc , char* argv[]){
                 break;
             case 2:
             {
+                
+                clock_t beg1 , end1 ;
+                clock_t beg2, end2 ;
+
                 printf("-------------Recherche ------------\n");
                 printf("saisir le mot à rechercher  ----> \t");
                 getchar();
                 char* mot =saisirChaine();
+                beg1=clock();
                 printf("Résultat recherche ---> hybrid: %d\n", searchHT(hybrid, mot));
+                end1=clock();
+                
+                printf("time used for searching in Hybrid --> %f seconds\n",(float)(end1-beg1)/CLOCKS_PER_SEC);
+                
+                beg2=clock();
                 printf("Résultat recherche ---> patricia: %d\n", searchPatricia(pt, mot));
+                end2=clock();
+                printf("time used for searching in patricia --> %f seconds\n",(float)(end2-beg2)/CLOCKS_PER_SEC);
             }
                 break;
             case 3:
             {
+                clock_t beg1 , end1 ;
+                clock_t beg2, end2 ;
+
                 printf("-------------Insertion ------------\n");
                 printf("Saisir le mot à insérer  ----> \t");
                 getchar();
                 char* mot =saisirChaine();
+                beg1=clock();
                 pt=insertPatricia(pt, mot);
+                end1=clock();
+                printf("time used for inserting in patricia --> %f seconds\n",(float)(end1-beg1)/CLOCKS_PER_SEC);
+                
+                beg2=clock() ;
                 hybrid=insertHT(hybrid, mot);
-
+                end2=clock();
+                printf("time used for inserting in hybrid --> %f seconds\n",(float)(end2-beg2)/CLOCKS_PER_SEC);
+                
             }
                 break;
             case 4 :
             {
+                clock_t beg1 , end1 ;
+                clock_t beg2, end2 ;
+
                 printf("-------------Prefix ------------\n");
                 printf("saisir le mot  ----> \t");
                 getchar();
                 char* mot =saisirChaine();
-                
+                beg1=clock() ;
                 printf("result nombre de mot prefix ---> hybrid: %d\n", nbPrefixHT(hybrid, mot));
+                end1=clock();
+                printf("time used for counting prefix in hybrid --> %f seconds\n",(float)(end1-beg1)/CLOCKS_PER_SEC);
+                
+                beg2=clock() ;
                 printf("result nombre de mot prefix  ---> patricia: %d\n", nbPrefixPatricia(pt, mot));
+                end2=clock();
+                printf("time used for counting in patricia --> %f seconds\n",(float)(end2-beg2)/CLOCKS_PER_SEC);
             
             }
                 break;
             case 5:
             {
+                clock_t end1 ,beg1 ;
                 printf("-------------Suppression ------------\n");
                 printf("saisir le mot à supprimer  ----> \t");
                 getchar();
                 char* mot =saisirChaine();
+                beg1=clock() ;
                 hybrid=removeHT(hybrid,mot);
+                end1=clock();
+                printf("time used for removing in hybrid --> %f seconds\n",(float)(end1-beg1)/CLOCKS_PER_SEC);
             }
                 break;
             case 6:
             {
+                clock_t beg1 ,end1 ,beg2,end2 ;
                 printf("-------------affichage dans l'ordre Alphabetique ------------\n");
                 printf("-------hybride----\n");
+                
+                beg1=clock();
                 printList(wordListHT(hybrid));
- 
+                end1=clock();
+                printf("time used for printing list---  hybrid --> %f seconds\n",(float)(end1-beg1)/CLOCKS_PER_SEC);
+                
+                beg2=clock();
                 printf("-------patricia---- \n");
                 printList(listWords(pt));
+                end2=clock();
+                
+                printf("time used for printing list--- patricia --> %f seconds\n",(float)(end2-beg2)/CLOCKS_PER_SEC);
             }
                 break;
             
@@ -210,12 +254,27 @@ int main(int argc , char* argv[]){
             {
                 printf("-------------Fusion patricia ------------\n");
                 printf("-------patricia----\n");
-                fusion=mergePatricia(pt,pt);
+                clock_t beg , end ;
+                patriciaTrie aux = buildShakespearePT(repertoireChargement[0]);
+                beg=clock();
+                fusion=mergePatricia(pt,aux);
+                end=clock();
+                printf("time used for merging  patricia --> %f seconds\n",(float)(end-beg)/CLOCKS_PER_SEC);
+                if(!isEmptyPatricia(fusion)) {
+               
+                    printf("NbWords : %d \n",countWordPatricia(fusion));
+                    printf("nbNULL: %d\n", countNilPatricia(fusion));
+                    printf("heightPT: %d\n", heightPatricia(fusion));
+                    printf("AverageDeph: %d \n",averageDepthPatricia(fusion));
+                }
+
+        
             }
             break;
                 
             case 8:
             {
+                /*
                 printf("-------------Affichage ------------\n");
                 //printf("-------patricia----\n");
                 char* path ="/Users/cb_mac/Desktop/UPMC/SEMESTRE1/ALGAV/dev/dev_algav/dev_algav_trie/dev_algav_trie/algav/hybrid.dot";
@@ -225,8 +284,38 @@ int main(int argc , char* argv[]){
                 displayHybrid_aux(hybrid, file);
                 //fseek(file, 0, SEEK_END);
                 fprintf(file,"} \n") ;
+                */
+                clock_t beg1 ,end1 ,beg2,end2 ;
+                printf("-------------Profondeur Moyenne ------------\n");
+        
+                beg1=clock();
+                printf("AverageDeph: %d \n",depthAvgHT(hybrid));
+                end1=clock();
+                printf("time used for  DepthAverage --- hybrid --> %f seconds\n",(float)(end1-beg1)/CLOCKS_PER_SEC);
                 
+                beg2=clock();
+                printf("AverageDeph: %d \n",averageDepthPatricia(pt));
+                end2=clock();
+                 printf("time used for DepthAverage --- patricia --> %f seconds\n",(float)(end2-beg2)/CLOCKS_PER_SEC);
                 
+            }
+                break;
+                
+            case 9:
+            {
+                clock_t beg1 ,end1 ,beg2,end2 ;
+                printf("-------------Nombre Null ------------\n");
+                
+                beg1=clock();
+                printf("NbNUll: %d \n",nbNULLHT(hybrid));
+                end1=clock();
+                printf("time used for  counting NbNull --- hybrid --> %f seconds\n",(float)(end1-beg1)/CLOCKS_PER_SEC);
+                
+                beg2=clock();
+                printf("NbNull: %d \n",countNilPatricia(pt));
+                end2=clock();
+                printf("time used for counting NbNull --- patricia --> %f seconds\n",(float)(end2-beg2)/CLOCKS_PER_SEC);
+
             }
                 break;
 

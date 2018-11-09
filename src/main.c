@@ -21,7 +21,6 @@ void displayHybrid_aux(HTptr hybrid,FILE* p){
     if (p != NULL) {
        
         if (hybrid==NULL) {
-            
             return ;
         }
         
@@ -80,16 +79,13 @@ void parcoursHT(HTptr pt) {
 
 int main(int argc , char* argv[]){
 
-    char * directory ="/Users/cb_mac/Desktop/UPMC/SEMESTRE1/ALGAV/dev/Shakespeare" ;
-    char* basic = "/Users/cb_mac/Desktop/UPMC/SEMESTRE1/ALGAV/dev/dev_algav/dev_algav_trie/dev_algav_trie/algav/example";
+    char * directory ="Shakespeare" ;
+    char* basic = "example";
     
     char** repertoireChargement=(char**)malloc(2*sizeof(char*));
     repertoireChargement[0]=basic;
     repertoireChargement[1]=directory;
     
-  //char * directory ="Shakespeare";
-  // char* path = "example/test";
-
     HTptr hybrid = NULL;
     patriciaTrie pt =NULL;
     patriciaTrie fusion =NULL ;
@@ -100,7 +96,6 @@ int main(int argc , char* argv[]){
 
     while (continuer)
     {
-
         printf("1.Chargements des Tries & info \n2.Recherche \n3. Insertion\n4.Nombre prefix \n5.Suppression \n6.Ordre alphabetique \n7.Fusion de patricia   \n8.profondeur moyenne \n9.Nb null \n0.Quitter\n" );
         printf("Saisir une opération ---> \t");
         if (scanf("%d",&choix) == EOF) {
@@ -259,17 +254,6 @@ int main(int argc , char* argv[]){
                 
             case 8:
             {
-                /*
-                printf("-------------Affichage ------------\n");
-                //printf("-------patricia----\n");
-                char* path ="/Users/cb_mac/Desktop/UPMC/SEMESTRE1/ALGAV/dev/dev_algav/dev_algav_trie/dev_algav_trie/algav/hybrid.dot";
-                
-                FILE* file =fopen(path,"w");
-                fprintf(file,"digraph d { \n") ;
-                displayHybrid_aux(hybrid, file);
-                //fseek(file, 0, SEEK_END);
-                fprintf(file,"} \n") ;
-                */
                 clock_t beg1 ,end1 ,beg2,end2 ;
                 printf("-------------Profondeur Moyenne ------------\n");
         

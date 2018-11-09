@@ -1,7 +1,7 @@
 TARGET = bin/algav
 
 CC = gcc -fdiagnostics-color=auto
-CFLAGS = -std=gnu99 -Wall -Werror -Wextra -O2 -Wno-incompatible-pointer-types -Wno-unused-value
+CFLAGS = -std=gnu99 -Wall -Wextra -O2 -Wno-incompatible-pointer-types
 LDFLAGS = -Wno-incompatible-pointer-types
 
 OBJECTS = $(patsubst src/%.c, bin/%.o, $(wildcard src/*.c))
